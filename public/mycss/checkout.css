@@ -1,0 +1,38 @@
+.border-delivery {
+    height: .1875rem;
+    width: 100%;
+    background-position-x: -1.875rem;
+    background-size: 7.25rem .1875rem;
+    background-image: repeating-linear-gradient(45deg, #6fa6d6, #6fa6d6 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px);
+}
+
+.ikon-lokasi {
+    width: .75rem;
+    height: 1rem;
+    margin-right: .5625rem;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    color: #ee4d2d;
+    fill: currentColor;
+}
+
+.p-keterangan {
+    font-size: 8pt;
+}
+
+.t-total{
+    position: absolute;
+    bottom:4px;
+    right: 16px;;
+}
+.nama-barang {
+    white-space: normal;
+    word-break: break-all;
+    margin-bottom: .3125rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

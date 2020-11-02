@@ -20,7 +20,7 @@
     <link href="<?= $template; ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
 
     <script src="<?= $template; ?>/assets/js/modernizr.min.js"></script>
-
+    <?= $this->renderSection('mycss'); ?>
 </head>
 
 <body>
@@ -152,7 +152,7 @@
         </div>
         <!-- end topbar-main -->
         <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-        <?= $this->include('layoutMenu_v'); ?>
+        <?php echo $this->include('layoutMenu_v'); ?>
         <!-- end navbar-custom -->
 
     </header>
@@ -216,6 +216,10 @@
     <!-- App js -->
     <script src="<?= $template; ?>/assets/js/jquery.core.js"></script>
     <script src="<?= $template; ?>/assets/js/jquery.app.js"></script>
+
+
+    <?= $this->renderSection('skrip'); ?>
+
 
 </body>
 

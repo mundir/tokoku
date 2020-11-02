@@ -18,6 +18,20 @@ class Home extends BaseController
 		return view('detail_v', $data);
 	}
 
+	public function keranjang()
+	{
+		$this->data['judulPage'] = 'Keranjang';
+		$data = $this->data;
+		return view('keranjang_v', $data);
+	}
+
+	public function checkout()
+	{
+		$this->data['judulPage'] = 'Keranjang';
+		$data = $this->data;
+		return view('checkout_v', $data);
+	}
+
 	//--------------------------------------------------------------------
 
 }
