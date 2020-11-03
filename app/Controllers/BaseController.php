@@ -27,7 +27,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['form', 'url'];
 	protected $data = [];
 
 	/**
@@ -42,11 +42,23 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		// $this->session = \Config\Services::session();
+		$this->session = \Config\Services::session();
+		if (!$this->session->get('isLogin')) {
+			return redirect()->to(base_url('akun/index'));
+		}
+		$row = $this->get_pengguna($this->session->get('id'));
+
 		$this->data = [
 			'judulWeb' => 'Toko Amanah Jaya Online',
-			'nama' => 'Abdul Halim',
+			'nama' => $row->nama_pengguna,
 			'template' => base_url('template/horizontal') . '/'
 		];
+	}
+
+	public function get_pengguna($id)
+	{
+		$model = new \App\Models\Pengguna_m();
+		$row = $model->find($id);
+		return $row;
 	}
 }

@@ -5,7 +5,7 @@
             <ul class="navigation-menu">
 
                 <li class="has-submenu">
-                    <a href="index.html"><i class="icon-speedometer"></i>Dashboard</a>
+                    <a href="index.html"><i class="icon-home"></i>Home</a>
                 </li>
 
                 <li class="has-submenu">
@@ -22,19 +22,19 @@
                 </li>
 
                 <li class="has-submenu">
-                    <a href="index.html"><i class="icon-speedometer"></i>Keranjang Belanja</a>
+                    <a href="index.html"><i class="icon-basket"></i>Keranjang Belanja</a>
                 </li>
 
                 <li class="has-submenu">
-                    <a href="index.html"><i class="icon-speedometer"></i>Pesanan Saya</a>
+                    <a href="index.html"><i class="icon-list"></i>Pesanan Saya</a>
                 </li>
 
                 <li class="has-submenu">
-                    <a href="index.html"><i class="icon-speedometer"></i>Keinginan</a>
+                    <a href="index.html"><i class="icon-heart"></i>Keinginan</a>
                 </li>
 
                 <li class="has-submenu">
-                    <a href="index.html"><i class="icon-speedometer"></i>Akun</a>
+                    <a href="index.html"><i class="icon-user"></i>Akun</a>
                 </li>
 
 

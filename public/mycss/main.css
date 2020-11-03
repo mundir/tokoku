@@ -1,0 +1,56 @@
+.card-kategori{
+    margin: 10px -10px 0 -10px;
+    padding-left: 11px;
+    padding-right: 11px;
+    vertical-align: middle;
+    background-color: white;
+}
+
+.lihat-semua{
+    padding-top: 10px;
+}
+.col-brg {
+    /* border: 1px solid red; */
+    padding: .1875rem;
+    /* max-width: 200px; */
+}
+
+.isi2 {
+    background-color: beige;
+    height: 230px;
+    width: 100%
+}
+
+.nama-barang {
+    white-space: normal;
+    word-break: break-all;
+    margin-bottom: .3125rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.harga {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #ee4d2d;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    margin-right: auto;
+    font-size: 1rem;
+}
+
+.terjual {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(0, 0, 0, .87);
+    padding-left: .1875rem;
+    font-family: -apple-system, Helvetica Neue, Helvetica, Roboto, Droid Sans, Arial, sans-serif;
+    font-weight: 400;
+    font-size: .625rem;
+}

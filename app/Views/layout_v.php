@@ -92,8 +92,7 @@
                                         <!-- item-->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                                             <div class="notify-icon"><img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt=""> </div>
-                                            <p class="notify-details">Cristina Pride</p>
-                                            <p class="text-muted font-13 mb-0 user-msg">Hi, How are you? What about our next meeting</p>
+                                            <p class="notify-details"><?= $nama; ?></p>
                                         </a>
 
                                     </div>
@@ -201,7 +200,6 @@
                 </div>
             </div>
         </div>
-        <div class="d-block d-sm-none" style="height:60px;"></div>
     </footer>
     <!-- End Footer -->
 

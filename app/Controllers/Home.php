@@ -6,8 +6,20 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		$this->data['judulPage'] = 'Dashboard';
-		$data = $this->data;
+		$this->data['judulPage'] = 'Halaman Awal';
+		$kategoriModel = new \App\Models\Kategori_m();
+		$dtKategori = $kategoriModel->findAll();
+		$barangModel = new \App\Models\Barang_m();
+
+		foreach ($dtKategori as $rowKategori) {
+			$barang[$rowKategori->id] = $barangModel->where('id_kategori', $rowKategori->id)->get()->getResult();
+		}
+		$data = [
+			'dtBarang' => $barang,
+			'dtKategori' => $dtKategori,
+		];
+		$data = array_merge($data, $this->data);
+
 		return view('main_v', $data);
 	}
 
@@ -27,7 +39,7 @@ class Home extends BaseController
 
 	public function checkout()
 	{
-		$this->data['judulPage'] = 'Keranjang';
+		$this->data['judulPage'] = 'Buat Pesanan';
 		$data = $this->data;
 		return view('checkout_v', $data);
 	}
