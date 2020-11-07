@@ -1,3 +1,12 @@
+
+
+.tes{
+    width: 63%;
+    background-color: #28a745;
+    padding-bottom: 22%;
+    margin: 4em auto 1em;
+}
+
 .card-kategori{
     margin: 10px -10px 0 -10px;
     padding-left: 11px;
@@ -12,6 +21,7 @@
 .col-brg {
     /* border: 1px solid red; */
     padding: .1875rem;
+    height: 100%;
     /* max-width: 200px; */
 }
 

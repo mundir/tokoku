@@ -10,9 +10,10 @@ class Keranjang_m extends Model
     protected $primaryKey = 'id';
 
     protected $returnType     = 'App\Entities\keranjang';
+    // protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_customer', 'id_barang', 'qty'];
+    protected $allowedFields = ['id', 'id_customer', 'id_barang', 'qty'];
 
     protected $useTimestamps = true;
 

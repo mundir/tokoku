@@ -29,6 +29,7 @@ class BaseController extends Controller
 	 */
 	protected $helpers = ['form', 'url'];
 	protected $data = [];
+	protected $session;
 
 	/**
 	 * Constructor.
@@ -42,17 +43,35 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		$this->session = \Config\Services::session();
-		if (!$this->session->get('isLogin')) {
-			return redirect()->to(base_url('akun/index'));
+		if (!session()->has('isLogin')) {
+			return redirect()->to(base_url('guest'));
 		}
+
+		$this->session = \Config\Services::session();
+
+
 		$row = $this->get_pengguna($this->session->get('id'));
 
+		$userGroup = $row->user_group;
 		$this->data = [
 			'judulWeb' => 'Toko Amanah Jaya Online',
 			'nama' => $row->nama_pengguna,
-			'template' => base_url('template/horizontal') . '/'
+			'template' => base_url('template/horizontal'),
+			'isHome' => false
 		];
+		switch ($userGroup) {
+			case 1: //superadmin
+				$this->data['vMenu'] = 'layoutMenuSuper_v';
+				break;
+			case 2: // admin
+				$this->data['vMenu'] = 'layoutMenuAdmin_v';
+				break;
+			case 3: //pengguna umum
+				$this->data['vMenu'] = 'layoutMenu_v';
+				break;
+			default:
+				return redirect()->to('login');
+		}
 	}
 
 	public function get_pengguna($id)

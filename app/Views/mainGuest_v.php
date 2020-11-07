@@ -33,8 +33,7 @@
                         <hr class="my-1">
                         <div class="d-flex flex-row">
                             <button type="button" class="btn btn-primary waves-effect waves-light" onclick="ambildata(<?= $brg->id; ?>)">Detail</button>
-
-                            <button type="button" onclick="masuk_keranjang(<?= $brg->id; ?>)" class="flex-fill btn btn-sm btn-danger waves-effect waves-light">Beli</button>
+                            <button onclick="silahkan_login()" type="button" class="flex-fill btn btn-sm btn-danger waves-effect waves-light">Beli</button>
 
                         </div>
 
@@ -104,7 +103,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
-                <button type="button" onclick="masuk_keranjang(<?= $brg->id; ?>)" class="btn btn-danger waves-effect waves-light">Masukkan Keranjang</button>
+                <button onclick="silahkan_login()" type="button" class="btn btn-danger waves-effect waves-light">Masukkan Keranjang</button>
 
             </div>
         </div><!-- /.modal-content -->
@@ -162,7 +161,7 @@
                 'X-Requested-With': 'XMLHttpRequest'
             },
             method: "POST",
-            url: "ambil_data",
+            url: "guest_ambil_data",
             data: {
                 id: idx
             }
@@ -183,25 +182,12 @@
         $('#belumLoginModal').modal('show');
     }
 
-    function masuk_keranjang(idx) {
-        var masukKeranjang = $.ajax({
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            method: "POST",
-            url: "home/tambah_keranjang",
-            data: {
-                id: idx
-            }
-        });
-        masukKeranjang.done(function(data) {
-            swal({
-                title: 'Berhasil!',
-                text: 'Barang telah dimasukkan kedalam keranjang',
-                type: 'success',
-                confirmButtonClass: 'btn btn-confirm mt-2'
-            });
-            $("#jumlah-keranjang").text(data);
+    function masuk_keranjang() {
+        swal({
+            title: 'Berhasil!',
+            text: 'Barang telah dimasukkan kedalam keranjang',
+            type: 'success',
+            confirmButtonClass: 'btn btn-confirm mt-2'
         });
     }
 </script>

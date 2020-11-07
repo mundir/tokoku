@@ -66,7 +66,7 @@
 
 
                         <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <a class="nav-link arrow-none waves-effect" href="<?= base_url('home/keranjang'); ?>">
 
                                 <i class="noti-icon">
                                     <!-- <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
@@ -78,34 +78,9 @@
                                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                                     </svg>
                                 </i>
-                                <span class="badge badge-dark badge-pill noti-icon-badge" style="right:2px">6</span>
+                                <span id="jumlah-keranjang" class="badge badge-dark badge-pill noti-icon-badge" style="right:2px"><?= $jumlahKeranjang; ?></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
 
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h6 class="m-0"><span class="float-right"><a href="" class="text-dark"><small>Clear All</small></a> </span>Chat</h6>
-                                </div>
-
-                                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 410px;">
-                                    <div class="slimscroll" style="max-height: 230px; overflow: hidden; width: auto; height: 410px;">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                            <div class="notify-icon"><img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt=""> </div>
-                                            <p class="notify-details"><?= $nama; ?></p>
-                                        </a>
-
-                                    </div>
-                                    <div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 8px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div>
-                                    <div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                    View all <i class="fi-arrow-right"></i>
-                                </a>
-
-                            </div>
                         </li>
 
                         <li class="dropdown notification-list">
@@ -135,7 +110,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="<?= base_url('logout'); ?>" class="dropdown-item notify-item">
                                     <i class="fi-power"></i> <span>Logout</span>
                                 </a>
 
@@ -151,7 +126,7 @@
         </div>
         <!-- end topbar-main -->
         <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-        <?php echo $this->include('layoutMenu_v'); ?>
+        <?php echo $this->include($vMenu); ?>
         <!-- end navbar-custom -->
 
     </header>
@@ -165,14 +140,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="page-title-box">
-                        <div class="btn-group pull-right">
-                            <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Highdmin</a></li>
-                                <li class="breadcrumb-item"><a href="#">Extra Pages</a></li>
-                                <li class="breadcrumb-item active">Starter</li>
-                            </ol>
+                        <div class="d-flex">
+                            <?php if ($isHome == false) : ?>
+                                <a href="javascript:history.back()" class="mr-2 text-danger"><i class="icon-arrow-left-circle"></i></a>
+                            <?php endif ?>
+                            <h4 class="page-title"><?= $judulPage; ?></h4>
                         </div>
-                        <h4 class="page-title"><?= $judulPage; ?></h4>
+
 
                     </div>
                 </div>

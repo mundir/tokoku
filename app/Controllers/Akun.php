@@ -49,4 +49,10 @@ class Akun extends Controller
             return redirect()->to('index')->withInput()->with('pesanError', $pesanError);
         }
     }
+
+    public function logout()
+    {
+        $this->session->destroy();
+        return redirect()->to('login');
+    }
 }

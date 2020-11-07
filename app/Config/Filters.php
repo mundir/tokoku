@@ -1,5 +1,8 @@
-<?php namespace Config;
+<?php
 
+namespace Config;
+
+use App\Filters\cekLogin;
 use CodeIgniter\Config\BaseConfig;
 
 class Filters extends BaseConfig
@@ -10,6 +13,7 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'cekLogin' => \App\Filters\CekLogin::class,
 	];
 
 	// Always applied before every request
@@ -17,6 +21,7 @@ class Filters extends BaseConfig
 		'before' => [
 			//'honeypot'
 			// 'csrf',
+			'cekLogin' => ['except' => ['login', 'registrasi', 'logout', 'guest', 'guest_ambil_data', 'guest/ambil_data', 'akun/*']]
 		],
 		'after'  => [
 			'toolbar',
