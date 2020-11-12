@@ -9,7 +9,7 @@ class Kategori_m extends Model
     protected $table      = 'kategori';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'App\Entities\kategori';
+    protected $returnType     = 'App\Entities\Kategori';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['nama_kategori', 'group_kategori'];

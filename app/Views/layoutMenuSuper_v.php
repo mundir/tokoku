@@ -11,15 +11,15 @@
                 <li class="has-submenu">
                     <a href="#"><i class="icon-layers"></i>Data</a>
                     <ul class="submenu">
-                        <li><a href="apps-calendar.html">Pengguna</a></li>
-                        <li><a href="admin/barang">Barang</a></li>
-                        <li><a href="apps-taskboard.html">Transaksi</a></li>
-                        <li><a href="apps-task-detail.html">Pengiriman</a></li>
+                        <li><a href="<?= base_url('admin/pengguna'); ?>">Pengguna</a></li>
+                        <li><a href="<?= base_url('admin/barang'); ?>">Barang</a></li>
+                        <li><a href="<?= base_url('admin/transaksi'); ?>">Transaksi</a></li>
+                        <li><a href="<?= base_url('admin/pengiriman'); ?>">Pengiriman</a></li>
                     </ul>
                 </li>
 
                 <li class="has-submenu">
-                    <a href="index.html"><i class="icon-user"></i>Akun</a>
+                    <a href="<?= base_url('admin/akun/profilku'); ?>"><i class="icon-user"></i>Akun</a>
                 </li>
 
 

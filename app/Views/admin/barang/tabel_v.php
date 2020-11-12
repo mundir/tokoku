@@ -1,4 +1,4 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 
 <?= $this->section('mycss') ?>
 <link rel="stylesheet" href="<?= base_url('mycss/main.css'); ?>">
@@ -6,10 +6,15 @@
 
 <?= $this->section('content') ?>
 
-<div class="card-kategori mb-0">
-    <div class="text-right" style="padding:11px;">
-        <button type="button" class="btn btn-info">Cari</button>
-        <a href="<?= $linkTambah; ?>" class="btn btn-primary">Tambah</a>
+<div class="card mb-2">
+    <div class="d-flex">
+        <div class="input-group mr-2">
+            <input type="text" class="form-control" placeholder="Cari nama barang..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Cari</button>
+            </div>
+        </div>
+        <a href="<?= base_url('admin/barang/tambah'); ?>" class="btn btn-primary btn-sm">Tambah</a>
     </div>
 </div>
 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6">

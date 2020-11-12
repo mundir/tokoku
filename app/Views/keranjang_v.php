@@ -61,6 +61,7 @@
         height: 6rem;
     }
 </style>
+<?= form_open('keranjang/proses'); ?>
 <div class="fixed-bottom p-3 checkout d-flex justify-content-between bg-white border-top">
     <div>
         <div class="custom-control custom-checkbox">
@@ -85,7 +86,7 @@
         <div class="card-box">
             <h4 class="m-t-0 header-title">Keranjang Belanja</h4>
             <p class="text-muted font-14 m-b-20">
-                Berikut barang-barang yang ada dalam keranjang belanja. Anda bisa bayar beberapa atau semuanya. silahkan klik Checkout untuk buat pesanan
+                Hallo Berikut barang-barang yang ada dalam keranjang belanja. Anda bisa bayar beberapa atau semuanya. silahkan klik Checkout untuk buat pesanan
             </p>
 
             <table class="table">
@@ -95,12 +96,14 @@
                         <tr>
                             <td>
                                 <div class="checkbox checkbox-custom">
-                                    <input type="checkbox" value='<?= $hitung; ?>' class="form-check-input" id="<?= 'cbk' . $hitung; ?>">
+                                    <input name="cbk[]" type="checkbox" value='<?= $hitung; ?>' class="form-check-input" id="<?= 'cbk' . $hitung; ?>">
                                     <label class="form-check-label" for="<?= 'cbk' . $hitung; ?>"><?= $hitung; ?></label>
                                 </div>
                             </td>
                             <td>
                                 <?php
+                                echo form_hidden('id_keranjang[]', $row->id,);
+                                echo form_input('id_barang[]', $row->id_barang, ["id" => 'id_barang' . $hitung], "hidden");
                                 echo form_input('harga[]', $row->harga, ["id" => 'harga' . $hitung], "hidden");
                                 $total = $row->harga * $row->qty;
                                 echo form_input('sub_total[]', $total, ['id' => 'sub-total' . $hitung], "hidden");
@@ -113,7 +116,7 @@
                                         <p class="text-danger mb-1 mt-0"> Rp <?= number_format($row->harga, 0, ",", "."); ?></p>
                                         <div class="d-flex mb-1">
                                             <button type="button" onclick="kurangi(<?= $hitung; ?>)" class="btn btn-sm btn-light"><i class="fi-circle-minus"></i></button>
-                                            <input id="qty<?= $hitung; ?>" class="form-control qty-input" type="number" value="<?= $row->qty; ?>">
+                                            <input name="qty[]" id="qty<?= $hitung; ?>" class="form-control qty-input" type="number" value="<?= $row->qty; ?>">
                                             <button type="button" onclick="tambahi(<?= $hitung; ?>)" class="btn btn-sm btn-light"><i class="fi-circle-plus"></i></button>
                                         </div>
                                         <div class="text-right">
@@ -138,7 +141,12 @@
 
 
 </div>
+
+<?= form_close(); ?>
+
 <?= $this->endSection(); ?>
+
+<?= $this->extend('layout_v') ?>
 
 <?= $this->section('skrip'); ?>
 <script>

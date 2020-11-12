@@ -9,7 +9,7 @@ class Keranjang_m extends Model
     protected $table      = 'keranjang';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'App\Entities\keranjang';
+    protected $returnType     = 'App\Entities\Keranjang';
     // protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 

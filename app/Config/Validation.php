@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 class Validation
 {
@@ -33,4 +35,9 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+	public $registrasi = [
+		'username' => 'required',
+		'password' => 'required',
+		'nomor_hp' => 'required',
+	];
 }

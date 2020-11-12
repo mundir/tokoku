@@ -9,7 +9,7 @@ class Komentar_m extends Model
     protected $table      = 'komentar';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'App\Entities\keranjang';
+    protected $returnType     = 'App\Entities\komentar';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['id_barang', 'id_customer', 'komentar'];

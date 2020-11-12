@@ -1,4 +1,4 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 
 <?= $this->section('mycss') ?>
 <!-- Bootstrap fileupload css -->

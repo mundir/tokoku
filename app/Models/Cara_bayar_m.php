@@ -9,7 +9,7 @@ class Cara_bayar_m extends Model
     protected $table      = 'cara_bayar';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'App\Entities\cara_bayar';
+    protected $returnType     = 'App\Entities\Cara_bayar';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['nama_cara', 'keterangan', 'status'];

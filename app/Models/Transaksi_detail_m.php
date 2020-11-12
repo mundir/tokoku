@@ -9,7 +9,7 @@ class Transaksi_detail_m extends Model
     protected $table      = 'transaksi_detail';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'App\Entities\transaksi_detail';
+    protected $returnType     = 'App\Entities\Transaksi_detail';
     // 'id_transaksi','id_barang','harga','qty'
     protected $allowedFields = ['id_transaksi', 'id_barang', 'harga', 'qty'];
 

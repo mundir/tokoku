@@ -9,7 +9,7 @@ class Cara_kirim_m extends Model
     protected $table      = 'cara_kirim';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'App\Entities\cara_kirim';
+    protected $returnType     = 'App\Entities\Cara_kirim';
 
     protected $allowedFields = ['nama_kirim', 'keterangan', 'status'];
 

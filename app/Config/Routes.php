@@ -35,7 +35,6 @@ $routes->get('/', 'Home::index');
 $routes->get('login', 'Akun::index');
 $routes->get('registrasi', 'Akun::registrasi');
 $routes->get('logout', 'Akun::logout');
-$routes->get('keranjang', 'Home::keranjang');
 $routes->post('ambil_data', 'Home::ambil_data');
 $routes->post('guest_ambil_data', 'Guest::ambil_data');
 $routes->post('in_keranjang', 'Home::tambah_keranjang');

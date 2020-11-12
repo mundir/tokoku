@@ -9,10 +9,10 @@ class Pengguna_m extends Model
     protected $table      = 'pengguna';
     protected $primaryKey = 'id';
 
-    protected $returnType     = 'App\Entities\pengguna';
+    protected $returnType     = 'App\Entities\Pengguna';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['username', 'password', 'nomor_hp', 'email', 'nama_pengguna', 'user_group', 'avatar'];
+    protected $allowedFields = ['id', 'username', 'password', 'nomor_hp', 'email', 'nama_pengguna', 'alamat', 'kab_kota', 'kodepos', 'user_group', 'avatar'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
