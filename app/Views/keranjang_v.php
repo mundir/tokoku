@@ -62,18 +62,12 @@
     }
 </style>
 <?= form_open('keranjang/proses'); ?>
-<div class="fixed-bottom p-3 checkout d-flex justify-content-between bg-white border-top">
-    <div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customCheck1">
-            <label class="custom-control-label" for="customCheck1"><small>Semua</small></label>
-        </div>
-    </div>
+<div class="fixed-bottom p-3 checkout d-flex justify-content-end bg-white border-top">
 
     <div class="div-harga d-flex">
         <div class="total-harga mr-1">
             <div class="srupiah mb-1">Total:</div>
-            <!-- <input type="text" value="0" id="total"> -->
+            <input name='total' type="hidden" value="0" id="total">
             <div id="total-v" class="text-danger rupiah">Rp 0</div>
         </div>
         <div>
@@ -88,7 +82,12 @@
             <p class="text-muted font-14 m-b-20">
                 Hallo Berikut barang-barang yang ada dalam keranjang belanja. Anda bisa bayar beberapa atau semuanya. silahkan klik Checkout untuk buat pesanan
             </p>
-
+            <!-- pesan Error -->
+            <?php if ($pesan = session()->getFlashdata('pesanError')) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $pesan ?>
+                </div>
+            <?php endif ?>
             <table class="table">
                 <?php $hitung = 1; ?>
                 <tbody>
@@ -96,7 +95,7 @@
                         <tr>
                             <td>
                                 <div class="checkbox checkbox-custom">
-                                    <input name="cbk[]" type="checkbox" value='<?= $hitung; ?>' class="form-check-input" id="<?= 'cbk' . $hitung; ?>">
+                                    <input name="cbk[]" type="checkbox" value='<?= $hitung; ?>' class="form-check-input cbk-list" id="<?= 'cbk' . $hitung; ?>">
                                     <label class="form-check-label" for="<?= 'cbk' . $hitung; ?>"><?= $hitung; ?></label>
                                 </div>
                             </td>
@@ -152,7 +151,9 @@
 <script>
     var grandTotal = 0;
     $(document).ready(function() {
-        $('input:checkbox').click(function() {
+        $('input:checkbox.cbk-list').prop('checked', false);
+
+        $('input:checkbox.cbk-list').click(function() {
             if ($(this).prop("checked") == true) {
                 var nomor = $(this).val();
                 grandTotal += parseInt($('#sub-total' + nomor).val());
@@ -164,6 +165,7 @@
 
             }
         });
+
 
         $("input.qty-input").blur(function() {
             var idx = $(this).attr('id').replace('qty', '');
@@ -215,6 +217,7 @@
 
     function tampil_total(total) {
         var format_st = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        $('#total').val(total);
         $('#total-v').text('Rp ' + format_st);
     }
 </script>

@@ -17,10 +17,10 @@ class Home extends \App\Controllers\BaseController
         $model = new \App\Models\Transaksi_m();
         $modelDetail = new \App\Models\Transaksi_detail_m();
         $this->data['card1'] = 'Ambil di Toko';
-        $tb[] = $model->find('cara_kirim', 1)->get()->getResult();
+        $tb[] = $model->where('cara_kirim', 'ambil')->get()->getResult();
 
         $this->data['card2'] = 'Dikirim';
-        $tb[] = $model->find('cara_kirim', 2)->get()->getResult();
+        $tb[] = $model->where('cara_kirim', 'kirim')->get()->getResult();
 
 
         return view('admin/home_v', $this->data);

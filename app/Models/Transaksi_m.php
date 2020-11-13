@@ -11,8 +11,11 @@ class Transaksi_m extends Model
 
     protected $returnType     = 'App\Entities\Transaksi';
     protected $useSoftDeletes = false;
-    // 'id_pembeli','total_harga','cara_bayar','cara_kirim','status_kirim','created_at','update_at'
-    protected $allowedFields = ['id_pembeli', 'total_harga', 'keterangan', 'cara_bayar', 'cara_kirim', 'status_kirim'];
+    protected $allowedFields = [
+        'id', 'id_pembeli', 'harga_barang',
+        'biaya_penanganan', 'biaya_pengiriman', 'total_harga',
+        'keterangan', 'cara_bayar', 'cara_kirim', 'status_bayar', 'status_kirim',
+    ];
 
     protected $useTimestamps = true;
 

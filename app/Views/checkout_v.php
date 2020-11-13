@@ -2,6 +2,7 @@
 
 
 <?= $this->section('content') ?>
+
 <?= form_open('keranjang/buat_pesanan'); ?>
 <div class="card-box px-0">
     <h4 class="m-t-0 ml-3 header-title">Data Barang</h4>
@@ -30,18 +31,22 @@
         </table>
     </div>
 
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
 
 </div>
 <div class="card-box">
     <h4 class="m-t-0 header-title">Cara Pengiriman</h4>
     <div class="mt-3 ml-3">
         <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio1" name="pengiriman" class="custom-control-input" checked="checked" value="1">
+            <input type="radio" id="customRadio1" name="pengiriman" class="custom-control-input" checked="checked" value="ambil">
             <label class="custom-control-label" for="customRadio1">Diambil Sendiri di toko</label>
             <p class="p-keterangan text-muted">Biaya penanganan gratis</p>
         </div>
         <div class="custom-control custom-radio">
-            <input type="radio" id="customRadio2" name="pengiriman" class="custom-control-input" value="2">
+            <input type="radio" id="customRadio2" name="pengiriman" class="custom-control-input" value="kirim">
             <label class="custom-control-label" for="customRadio2">Dikirim ke alamat penerima</label>
 
             <p class="p-keterangan text-muted">Ongkos kirim untuk wilayah Bululawang adalah Rp 10.000. Pengiriman dilakukan setiap jam 3 sore. Setiap pesanan yang masuk
@@ -79,22 +84,22 @@
     <h4 class="m-t-0 header-title">Cara Bayar</h4>
     <div class="mt-3 ml-3">
         <div class="custom-control custom-radio">
-            <input value="1" type="radio" id="rd1" name="cara_bayar" class="custom-control-input" disabled>
+            <input value="saldo" type="radio" id="rd1" name="cara_bayar" class="custom-control-input" disabled>
             <label class="custom-control-label" for="rd1">Saldo Akun</label>
             <p class="p-keterangan text-muted">Memotong saldo yang anda miliki di Amanahjaya-pay</p>
         </div>
         <div class="custom-control custom-radio">
-            <input value="2" type="radio" id="rd2" name="cara_bayar" class="custom-control-input" checked="checked">
+            <input value="tunai" type="radio" id="rd2" name="cara_bayar" class="custom-control-input" checked="checked">
             <label class="custom-control-label" for="rd2">Tunai</label>
             <p class="p-keterangan text-muted">Ambil di toko dan bayar tunai</p>
         </div>
         <div class="custom-control custom-radio">
-            <input value="3" type="radio" id="rd3" name="cara_bayar" class="custom-control-input">
+            <input value="qrcode" type="radio" id="rd3" name="cara_bayar" class="custom-control-input">
             <label class="custom-control-label" for="rd3">QR Code</label>
             <p class="p-keterangan text-muted">selanjutnya anda akan diarahkan ke halaman scan QR-Code</p>
         </div>
         <div class="custom-control custom-radio">
-            <input value="4" type="radio" id="rd4" name="cara_bayar" class="custom-control-input">
+            <input value="transfer" type="radio" id="rd4" name="cara_bayar" class="custom-control-input">
             <label class="custom-control-label" for="rd4">Transfer Bank</label>
             <p class="p-keterangan text-muted">silahkan transfer ke rekening BCA 350714250000050000 atas nama Amanah Jaya</p>
         </div>

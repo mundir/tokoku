@@ -5,18 +5,17 @@ namespace App\Controllers;
 class Home extends BaseController
 {
 
-	protected $totalKeranjang;
-	protected $id_customer;
-
-	public function __construct()
-	{
-		$this->id_customer = session()->get('id');
-		$keranjangModel = new \App\Models\Keranjang_m();
-		$this->totalKeranjang = $keranjangModel->where('id_customer', $this->id_customer)->countAllResults();
-	}
 	public function index()
 	{
-		$this->data['judulPage'] = 'Selamat Pagi Kawan..';
+		$this->data['judulPage'] = 'Hai, ' . $this->data['nama'];
+		$this->data['isLogin'] = false;
+		if ($this->data['guest'] == false) {
+			$keranjangModel = new \App\Models\Keranjang_m();
+			$totalKeranjang = $keranjangModel->where('id_customer', $this->data['idPengguna'])->countAllResults();
+			$this->session->set('jumlahKeranjang', $totalKeranjang);
+			$this->data['jumlahKeranjang'] = $totalKeranjang;
+			$this->data['isLogin'] = true;
+		}
 
 		$kategoriModel = new \App\Models\Kategori_m();
 		$dtKategori = $kategoriModel->findAll();
@@ -25,14 +24,14 @@ class Home extends BaseController
 		foreach ($dtKategori as $rowKategori) {
 			$barang[$rowKategori->id] = $barangModel->where('id_kategori', $rowKategori->id)->get()->getResult();
 		}
+
 		$data = [
-			'jumlahKeranjang' => $this->totalKeranjang,
 			'dtBarang' => $barang,
 			'dtKategori' => $dtKategori,
-			'isLogin' => true
+			'isHome' => true
 		];
-		$data = array_merge($data, $this->data);
-		$data['isHome'] = true;
+		$data = array_merge($this->data, $data);
+
 		return view('main_v', $data);
 	}
 
@@ -65,31 +64,32 @@ class Home extends BaseController
 
 	public function tambah_keranjang()
 	{
+
 		$post = $this->request->getPost();
 		$id_barang = $post['id'];
+
 		$model = new \App\Models\Keranjang_m();
 		$ntt = new \App\Entities\Keranjang();
 		$ntt->id_barang = $id_barang;
-		$ntt->id_customer = $this->id_customer;
-
-		$tbKeranjang = $model->where('id_customer', $this->id_customer)->Where('id_barang', $id_barang)->first();
+		$ntt->id_customer = $this->data['idPengguna'];
+		$tbKeranjang = $model->where('id_customer', $this->data['idPengguna'])->Where('id_barang', $id_barang)->first();
 		if (!isset($tbKeranjang)) {
-			$lead = str_pad($this->id_customer . $id_barang, 4, '0', STR_PAD_LEFT);
-			$newID = uniqid($lead);
+			$newID = $this->myid('KR');
 			$ntt->id = $newID;
 			$ntt->qty = 1;
 			$model->insert($ntt);
-			$this->totalKeranjang++;
+			$this->data['jumlahKeranjang']++;
 		} else {
 			$IDlama = $tbKeranjang->id;
 			$ntt->id = $IDlama;
 			$qty = $tbKeranjang->qty;
 			$qty++;
+
 			$ntt->qty = $qty;
 			$model->save($ntt);
 		}
 
-		echo $this->totalKeranjang;
+		echo $this->data['jumlahKeranjang'];
 	}
 
 	//--------------------------------------------------------------------

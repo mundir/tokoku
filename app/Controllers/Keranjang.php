@@ -15,21 +15,22 @@ class Keranjang extends BaseController
             ->get()->getResult();
         $data = [
             'judulPage' => "Keranjang Belanja",
-            'jumlahKeranjang' => count($dtKeranjang),
             'dtKeranjang' => $dtKeranjang,
         ];
         $data = array_merge($data, $this->data);
-
 
         return view('keranjang_v', $data);
     }
 
     public function proses()
     {
-        $customerModel = new \App\Models\Pengguna_m();
-        $cust = $customerModel->find($idCustomer = $this->session->get('id'));
-        $barangModel = new \App\Models\Barang_m();
         $post = $this->request->getPost();
+        if (!isset($post['cbk'])) return redirect()->to('index')->with('pesanError', 'Anda belum memilih barang.<br>Klik Centang untuk pilih barang');
+        $customerModel = new \App\Models\Pengguna_m();
+        $cust = $customerModel->find($this->session->get('id'));
+        $barangModel = new \App\Models\Barang_m();
+        $keranjangModel = new \App\Models\Keranjang_m();
+        $keranjangNtt = new \App\Entities\Keranjang();
 
         $indexCbk = $post['cbk'];
         foreach ($indexCbk as $x) {
@@ -37,16 +38,21 @@ class Keranjang extends BaseController
             $idBarang = $post['id_barang'][$x];
             $idKeranjang = $post['id_keranjang'][$x];
             $arrData[] = ['id_keranjang' => $idKeranjang, 'barang' => $barangModel->find($idBarang), 'qty' => $post['qty'][$x]];
+            $keranjangNtt->id = $idKeranjang;
+            if ($keranjangNtt->qty != $post['qty'][$x]) {
+                $keranjangNtt->qty = $post['qty'][$x];
+                $keranjangModel->save($keranjangNtt);
+            }
         }
         $data = [
             'judulPage' => "Checkout",
-            'jumlahKeranjang' => 0,
             'dataTabel' => $arrData,
             'dataCust' => $cust
         ];
 
-        $data = array_merge($data, $this->data);
-        return view('checkout_v', $data);
+        $data = array_merge($this->data, $data);
+
+        return view('checkoutWizard_v', $data);
     }
 
     public function buat_pesanan()
@@ -57,19 +63,19 @@ class Keranjang extends BaseController
         $modelDetail = new \App\Models\Transaksi_detail_m();
         $ntt = new \App\Entities\Transaksi();
         $nttDetail = new \App\Entities\Transaksi_detail();
+        $newID = $this->myid('TR');
+        // 'id', 'id_pembeli', 'harga_barang',
+        // 'biaya_penanganan', 'biaya_pengiriman', 'total_harga',
+        // 'keterangan', 'cara_bayar', 'cara_kirim', 'status_bayar', 'status_kirim',
+        $ntt->id = $newID;
         $ntt->id_pembeli = $this->session->get('id');
-        $ntt->total_harga = $post['total_barang'];
-        $ntt->keterangan = $post['keterangan'];
-        $ntt->cara_bayar = $post['cara_bayar'];
-        $ntt->cara_kirim = $post['pengiriman'];
-        $ntt->status_kirim = 0;
-        $model->save($ntt);
-        $idTransaksi = $model->getInsertID();
+        $ntt->fill($post);
+        $model->insert($ntt);
 
         $modalKeranjang = new \App\Models\Keranjang_m();
 
         foreach ($post['barang'] as $aa) {
-            $nttDetail->id_transaksi = $idTransaksi;
+            $nttDetail->id_transaksi = $newID;
             $nttDetail->id_barang = $aa['id_barang'];
             $nttDetail->harga = $aa['harga'];
             $nttDetail->qty = $aa['qty'];

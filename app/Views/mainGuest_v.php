@@ -8,10 +8,8 @@
 
 <?= $this->section('content') ?>
 
-
-
 <?php foreach ($dtKategori as $row) : ?>
-    <div class="card-kategori mb-0 d-flex justify-content-between">
+    <div class="card-kategori mb-0 mt-3 d-flex justify-content-between">
         <div>
             <h5 class="group-kategori"><?= $row->nama_kategori; ?></h5>
         </div>
@@ -21,14 +19,16 @@
         <?php foreach ($dtBarang[$row->id] as $brg) : ?>
             <div class="col col-brg">
                 <div class="card isi">
-                    <img src="<?= base_url('img') . '/' . $brg->gambar ?>" class="card-img-top" alt="...">
+                    <div class="gambar">
+                        <img src="<?= base_url('img') . '/' . $brg->gambar ?>" class="img-fluid" alt="..." />
+                    </div>
                     <div class="card-body p-2">
-                        <div class="card-title">
-                            <h5 class="nama-barang"><?= $brg->nama_barang; ?></h5>
+                        <div class="card-nmbarang">
+                            <h5 class="nama-barang m-0 p-0"><?= $brg->nama_barang; ?></h5>
                         </div>
                         <div class="d-flex flex-row">
-                            <div class="harga">Rp <?= $brg->harga; ?></div>
-                            <div class="terjual">10rb+ terjual</div>
+                            <div class="harga">Rp <?= number_format($brg->harga, 0, ",", "."); ?></div>
+                            <div class="terjual"><?= $brg->terjual; ?> terjual</div>
                         </div>
                         <hr class="my-1">
                         <div class="d-flex flex-row">
@@ -68,7 +68,7 @@
     .deskripsi {
         padding: 1em;
         height: 17em;
-        overflow-y: scroll;
+        overflow-y: auto;
 
 
     }
@@ -142,6 +142,7 @@
 <script src="<?= base_url('template'); ?>/plugins/raty-fa/jquery.raty-fa.js"></script>
 <script>
     $(document).ready(function() {
+
         $('#score').raty({
             score: 4,
             readOnly: true,

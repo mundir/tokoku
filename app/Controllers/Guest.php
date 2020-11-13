@@ -25,7 +25,7 @@ class Guest extends Controller
             'dtBarang' => $barang,
             'dtKategori' => $dtKategori,
             'vMenu' => 'layoutMenu_v',
-            'isHome' => false
+            'isHome' => true
         ];
         return view('mainGuest_v', $data);
     }

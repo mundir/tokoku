@@ -45,15 +45,15 @@ class Akun extends Controller
             ];
             $session->set($dtses);
             switch ($tabel->user_group) {
-                case 1:
+                case '1':
                     return redirect()->to(base_url('admin/home'));
                     break;
-                case 2:
+                case '2':
                     return redirect()->to(base_url('admin/home'));
                     break;
-                case 3:
-                    break;
+                case '3':
                     return redirect()->to(base_url('home'));
+                    break;
             }
         } else {
             $pesanError = "Data tidak ditemukan!";

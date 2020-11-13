@@ -43,20 +43,40 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		if (!session()->has('isLogin')) {
-			return redirect()->to(base_url('guest'));
-		}
+
 
 		$this->session = \Config\Services::session();
 
+		if ($this->session->has('isLogin')) {
+			$row = $this->get_pengguna($this->session->get('id'));
+			if ($this->session->has("jumlahKeranjang")) {
+				$jumlahKeranjang = $this->session->get('jumlahKeranjang');
+			} else {
+				$jumlahKeranjang = 0;
+			}
+			$userGroup = $row->user_group;
+			$idPengguna = $row->id;
+			$nama = $row->nama_pengguna;
+			$avatar = $row->avatar;
+			$guest = false;
+		} else {
+			$userGroup = 3;
+			$idPengguna = 'guest';
+			$nama = 'Akun Tamu';
+			$avatar = 'default.jpg';
+			$guest = true;
+			$jumlahKeranjang = 0;
+		}
 
-		$row = $this->get_pengguna($this->session->get('id'));
-
-		$userGroup = $row->user_group;
 		$this->data = [
+
 			'judulWeb' => 'Toko Amanah Jaya Online',
-			'nama' => $row->nama_pengguna,
+			'idPengguna' => $idPengguna,
+			'nama' => $nama,
+			'avatar' => $avatar,
+			'guest' => $guest,
 			'template' => base_url('template/horizontal'),
+			'jumlahKeranjang' => $jumlahKeranjang,
 			'isHome' => false
 		];
 		switch ($userGroup) {
@@ -84,7 +104,7 @@ class BaseController extends Controller
 
 	function myid($awalan = "AJ", $strength = 4)
 	{
-		$input = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$input = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$input_length = strlen($input);
 		$random_string = '';
 		for ($i = 0; $i < $strength; $i++) {

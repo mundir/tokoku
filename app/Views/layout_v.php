@@ -51,41 +51,41 @@
 
                     <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-                        <li class="menu-item">
-                            <!-- Mobile menu toggle-->
-                            <a class="navbar-toggle nav-link">
-                                <div class="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </a>
-                            <!-- End mobile menu toggle-->
-                        </li>
+                        <?php if ($isHome) : ?>
+                            <li class="menu-item">
+                                <!-- Mobile menu toggle-->
+                                <a class="navbar-toggle nav-link">
+                                    <div class="lines">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </a>
+                                <!-- End mobile menu toggle-->
+                            </li>
 
 
+                            <li class="dropdown notification-list">
+                                <a class="nav-link arrow-none waves-effect" href="<?= base_url('keranjang'); ?>">
 
-                        <li class="dropdown notification-list">
-                            <a class="nav-link arrow-none waves-effect" href="<?= base_url('keranjang'); ?>">
-
-                                <i class="noti-icon">
-                                    <!-- <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                                    <i class="noti-icon">
+                                        <!-- <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
                                         <path d="M13.5 21c-.276 0-.5-.224-.5-.5s.224-.5.5-.5.5.224.5.5-.224.5-.5.5m0-2c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5m-6 2c-.276 0-.5-.224-.5-.5s.224-.5.5-.5.5.224.5.5-.224.5-.5.5m0-2c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5m16.5-16h-2.964l-3.642 15h-13.321l-4.073-13.003h19.522l.728-2.997h3.75v1zm-22.581 2.997l3.393 11.003h11.794l2.674-11.003h-17.861z" />
                                     </svg> -->
-                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-                                        <circle cx="9" cy="21" r="1"></circle>
-                                        <circle cx="20" cy="21" r="1"></circle>
-                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                                    </svg>
-                                </i>
-                                <span id="jumlah-keranjang" class="badge badge-dark badge-pill noti-icon-badge" style="right:2px"><?= $jumlahKeranjang; ?></span>
-                            </a>
+                                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                            <circle cx="9" cy="21" r="1"></circle>
+                                            <circle cx="20" cy="21" r="1"></circle>
+                                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                        </svg>
+                                    </i>
+                                    <span id="jumlah-keranjang" class="badge badge-dark badge-pill noti-icon-badge" style="right:2px"><?= $jumlahKeranjang; ?></span>
+                                </a>
 
-                        </li>
-
+                            </li>
+                        <?php endif ?>
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="<?= $template; ?>/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"><?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="<?= base_url('img/profil/' . $avatar) ?>" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"><?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
@@ -121,16 +121,44 @@
         </div>
         <!-- end topbar-main -->
         <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-        <?php echo $this->include($vMenu); ?>
+        <?php echo ($isHome) ? $this->include($vMenu) : ''; ?>
         <!-- end navbar-custom -->
 
     </header>
     <!-- End Navigation Bar-->
+    <style>
+        .loading {
+            position: fixed;
+            z-index: 999;
 
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Transparent Overlay */
+        .loading::before {
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
 
     <div class="wrapper">
         <div class="container">
-
+            <div class="loading">
+                <div class="spinner-border"></div>
+            </div>
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
@@ -184,7 +212,11 @@
     <script src="<?= $template; ?>/assets/js/jquery.core.js"></script>
     <script src="<?= $template; ?>/assets/js/jquery.app.js"></script>
 
-
+    <script>
+        $(document).ready(function() {
+            $('.loading').hide();
+        })
+    </script>
     <?= $this->renderSection('skrip'); ?>
 
 
