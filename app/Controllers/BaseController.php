@@ -47,50 +47,65 @@ class BaseController extends Controller
 
 		$this->session = \Config\Services::session();
 
+		$userGroup = '0';
+		$kategoriModel = new \App\Models\Kategori_m();
+		$dtKategori = $kategoriModel->findAll();
+
 		if ($this->session->has('isLogin')) {
 			$row = $this->get_pengguna($this->session->get('id'));
 			if ($this->session->has("jumlahKeranjang")) {
 				$jumlahKeranjang = $this->session->get('jumlahKeranjang');
 			} else {
 				$jumlahKeranjang = 0;
+				$this->session->set('jumlahKeranjang' . $jumlahKeranjang);
 			}
 			$userGroup = $row->user_group;
 			$idPengguna = $row->id;
 			$nama = $row->nama_pengguna;
 			$avatar = $row->avatar;
-			$guest = false;
 		} else {
-			$userGroup = 3;
 			$idPengguna = 'guest';
 			$nama = 'Akun Tamu';
 			$avatar = 'default.jpg';
-			$guest = true;
 			$jumlahKeranjang = 0;
 		}
-
 		$this->data = [
-
 			'judulWeb' => 'Toko Amanah Jaya Online',
+			'judulPage' => 'Under Construction',
 			'idPengguna' => $idPengguna,
 			'nama' => $nama,
 			'avatar' => $avatar,
-			'guest' => $guest,
-			'template' => base_url('template/horizontal'),
 			'jumlahKeranjang' => $jumlahKeranjang,
-			'isHome' => false
+			'userGroup' => $userGroup,
+			'akuns' => $this->vAkun($userGroup),
+			'dtKategori' => $dtKategori,
 		];
+		$this->data['showMenu'] = false;
+		$this->data['showKeranjang'] = false;
+		$this->data['showBack'] = True;
+		$this->data['subAktif'] = '';
+
 		switch ($userGroup) {
-			case 1: //superadmin
-				$this->data['vMenu'] = 'layoutMenuSuper_v';
-				break;
-			case 2: // admin
-				$this->data['vMenu'] = 'layoutMenuAdmin_v';
-				break;
-			case 3: //pengguna umum
+			case '0': //guest
 				$this->data['vMenu'] = 'layoutMenu_v';
+				$this->data['homepg'] = 'home';
+				$this->data['backLink'] = 'home';
 				break;
-			default:
-				return redirect()->to('login');
+			case 'cust': //pengguna umum
+				$this->data['vMenu'] = 'layoutMenu_v';
+				$this->data['homepg'] = 'home';
+				$this->data['backLink'] = 'home';
+				break;
+			case 'admin': //admin
+				$this->data['vMenu'] = 'layoutMenuAdmin_v';
+				$this->data['homepg'] = 'admin/home';
+				$this->data['backLink'] = 'admin/home';
+				break;
+			case 'super': // super
+				$this->data['vMenu'] = 'layoutMenuSuper_v';
+				$this->data['homepg'] = 'admin/home';
+				$this->data['backLink'] = 'admin/home';
+				break;
 		}
 	}
 
@@ -101,6 +116,41 @@ class BaseController extends Controller
 		return $row;
 	}
 
+	public function totalkeranjang()
+	{
+		$keranjangModel = new \App\Models\Keranjang_m();
+		$totalKeranjang = $keranjangModel->where('id_customer', $this->session->get('id'))->countAllResults();
+		return $totalKeranjang;
+	}
+	private function vAkun($userGroup)
+	{
+		$profil = [
+			'link' => 'profil',
+			'icon' => 'icon-user',
+			'label' => 'Profilku',
+		];
+		$admin_profil = [
+			'link' => 'admin/akun',
+			'icon' => 'icon-user',
+			'label' => 'Profilku',
+		];
+		$logout = [
+			'link' => 'akun/logout',
+			'icon' => 'icon-logout',
+			'label' => 'Logout',
+		];
+		$login = [
+			'link' => 'akun',
+			'icon' => 'icon-login',
+			'label' => 'Login',
+		];
+		$vAkuns['0'] = [$profil, $login];
+		$vAkuns['cust'] = [$profil, $logout];
+		$vAkuns['admin'] = [$admin_profil, $logout];
+		$vAkuns['super'] = [$admin_profil, $logout];
+
+		return $vAkuns[$userGroup];
+	}
 
 	function myid($awalan = "AJ", $strength = 4)
 	{

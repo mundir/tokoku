@@ -1,4 +1,4 @@
-<?= $this->extend('layoutAdmin_v') ?>
+<?= $this->extend('layout_v') ?>
 
 <?= $this->section('mycss') ?>
 <link rel="stylesheet" href="<?= base_url('mycss/main.css'); ?>">
@@ -7,38 +7,52 @@
 <?= $this->section('content') ?>
 
 <div class="card mb-2">
-    <div class="d-flex">
+    <div class="d-flex justify-content-between">
+        <?= form_open('admin/barang/cari'); ?>
         <div class="input-group mr-2">
-            <input type="text" class="form-control" placeholder="Cari nama barang..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input name="txt-cari" type="text" class="form-control" placeholder="Cari nama barang..." aria-label="cari barang" aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Cari</button>
+                <button class="btn btn-light" type="submit" id="button-addon2"><i class="icon-magnifier"></i></button>
             </div>
         </div>
-        <a href="<?= base_url('admin/barang/tambah'); ?>" class="btn btn-primary btn-sm">Tambah</a>
+        <?= form_close(); ?>
+        <div class="text-right">
+            <a href="<?= base_url('admin/barang/input_data'); ?>" class="btn btn-primary">Tambah</a>
+        </div>
     </div>
+
 </div>
 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6">
     <?php foreach ($mainTabel as $brg) : ?>
         <div class="col col-brg">
             <div class="card isi">
-                <img src="<?= base_url('img') . '/' . $brg->gambar ?>" class="card-img-top" alt="...">
+                <div class="gambar">
+                    <img src="<?= base_url('img/kotak') . '/' . $brg->gambar ?>" class="card-img-top" alt="..." />
+                </div>
                 <div class="card-body p-2">
-                    <div class="card-title">
-                        <h5 class="nama-barang"><?= $brg->nama_barang; ?></h5>
+                    <div class="card-nmbarang">
+                        <h5 class="nama-barang m-0 p-0"><?= $brg->nama_barang; ?></h5>
                     </div>
                     <div class="d-flex flex-row">
-                        <div class="harga">Rp <?= $brg->harga; ?></div>
-                        <div class="terjual">10rb+ terjual</div>
+                        <div class="harga">Rp <?= number_format($brg->harga, 0, ",", "."); ?></div>
+                        <div class="terjual text-right">
+                            <div><?= $brg->terjual; ?> terjual</div>
+                            <div><?= $brg->stok; ?> tersedia</div>
+                        </div>
                     </div>
-                    <hr class="my-1">
-                    <div class="text-right">
-                        <a href="<?= $mainCtrl . '/edit/' . $brg->id; ?>" class="btn btn-sm btn-danger">Edit</a>
+
+                    <div class="d-flex justify-content-between mt-2">
+                        <a href="<?= base_url('admin/barang/gambar/' . $brg->id) ?>" class="btn btn-primary">Foto</a>
+                        <a href="<?= base_url('admin/barang/input_data/' . $brg->id); ?>" class="btn btn-danger">Edit</a>
                     </div>
 
                 </div>
             </div>
         </div>
     <?php endforeach; ?>
+</div>
+<div class="d-flex justify-content-center mt-3">
+    <?= $pager->links('group1', 'bstrap'); ?>
 </div>
 
 <?php echo $this->endSection() ?>

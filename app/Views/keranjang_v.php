@@ -112,7 +112,8 @@
                                 <div class="d-flex">
                                     <div class="cart-item-overview__thumbnail" alt="cart_thumbnail" style="background-image: url(&quot;<?= base_url('img') . '/' . $row->gambar; ?>&quot;);"></div>
                                     <div class="ml-1">
-                                        <p class="text-danger mb-1 mt-0"> Rp <?= number_format($row->harga, 0, ",", "."); ?></p>
+                                        <h6 class="m-0 text-muted"><span id="ket-stok<?= $hitung; ?>"><?= $row->stok; ?></span> tersedia</h6>
+                                        <div class="text-muted m-0"> Rp <?= number_format($row->harga, 0, ",", "."); ?></div>
                                         <div class="d-flex mb-1">
                                             <button type="button" onclick="kurangi(<?= $hitung; ?>)" class="btn btn-sm btn-light"><i class="fi-circle-minus"></i></button>
                                             <input name="qty[]" id="qty<?= $hitung; ?>" class="form-control qty-input" type="number" value="<?= $row->qty; ?>">
@@ -178,6 +179,16 @@
                 tampil_total(grandTotal);
             }
         });
+
+        $("input.qty-input").change(function() {
+            var idx = $(this).attr('id').replace('qty', '');
+            var qty = $(this).val();
+            var stok = $('#ket-stok' + idx).text();
+            if ($(this).val() >= stok) {
+                alert('tidak boleh melebihi stok barang' + stok);
+                $(this).val(stok);
+            }
+        });
     });
 
 
@@ -195,9 +206,14 @@
     }
 
     function tambahi(idx) {
+        var stok = $('#ket-stok' + idx).text();
         var qty = $('#qty' + idx).val();
-        qty++;
-        var subTotal = tampilkan_plusminus(idx, qty);
+        console.log(stok);
+
+        if (qty < stok) {
+            qty++;
+            var subTotal = tampilkan_plusminus(idx, qty);
+        }
         if (document.getElementById('cbk' + idx).checked) {
             var harga = $("#harga" + idx).val();
             grandTotal += parseInt(harga);

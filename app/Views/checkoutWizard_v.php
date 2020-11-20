@@ -185,12 +185,12 @@
         echo "<br>";
         $hit++;
     }
-    echo '<br>harga_barang ' . form_hidden('harga_barang', $total);
-    echo '<br>penanganan ' . form_hidden('biaya_penanganan', 0);
-    echo '<br>pengiriman ' . form_hidden('biaya_pengiriman', 0);
-    echo '<br>total ' . form_hidden('total_harga', $total);
-    echo '<br>statusb ' . form_hidden('status_bayar', 0);
-    echo '<br>harga_barang ' . form_hidden('status_kirim', 0);
+    echo form_hidden('harga_barang', $total);
+    echo form_hidden('biaya_penanganan', 0);
+    echo form_hidden('biaya_pengiriman', 0);
+    echo form_hidden('total_harga', $total);
+    echo form_hidden('status_bayar', 0);
+    echo form_hidden('status_kirim', 0);
     ?>
 
 </div>

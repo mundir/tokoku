@@ -5,17 +5,17 @@
     <meta charset="utf-8" />
     <title><?= $judulWeb; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
+    <meta content="Menjual segala kebutuhan anda secara online, mudah dan praktis." name="description" />
+    <meta content="AmanahJaya" name="mundir_muzaini" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+    <?php $template = base_url('template/horizontal') ?>
     <!-- App favicon -->
     <link rel="shortcut icon" href="<?= $template; ?>/assets/images/favicon.ico">
 
     <!-- App css -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
     <link href="<?= $template; ?>/assets/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="<?= $template; ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
 
@@ -38,7 +38,7 @@
                             <span class="logo-large"><i class="mdi mdi-radar"></i> Highdmin</span>
                         </a> -->
                     <!-- Image Logo -->
-                    <a href="home" class="logo">
+                    <a href="<?= base_url($homepg); ?>" class="logo">
                         <img src="<?= $template; ?>/assets/images/logo_sm.png" alt="" height="26" class="logo-small">
                         <img src="<?= $template; ?>/assets/images/logo.png" alt="" height="22" class="logo-large">
                     </a>
@@ -51,7 +51,7 @@
 
                     <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-                        <?php if ($isHome) : ?>
+                        <?php if ($showMenu || $userGroup == 'super' || $userGroup == 'admin') : ?>
                             <li class="menu-item">
                                 <!-- Mobile menu toggle-->
                                 <a class="navbar-toggle nav-link">
@@ -63,8 +63,9 @@
                                 </a>
                                 <!-- End mobile menu toggle-->
                             </li>
+                        <?php endif ?>
 
-
+                        <?php if ($showKeranjang) : ?>
                             <li class="dropdown notification-list">
                                 <a class="nav-link arrow-none waves-effect" href="<?= base_url('keranjang'); ?>">
 
@@ -88,26 +89,11 @@
                                 <img src="<?= base_url('img/profil/' . $avatar) ?>" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"><?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fi-cog"></i> <span>Cari Barang</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="<?= base_url('pesananku'); ?>" class="dropdown-item notify-item">
-                                    <i class="fi-cog"></i> <span>Pesanan</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fi-head"></i> <span>Akun Saya</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="<?= base_url('logout'); ?>" class="dropdown-item notify-item">
-                                    <i class="fi-power"></i> <span>Logout</span>
-                                </a>
+                                <?php foreach ($akuns as $akun) : ?>
+                                    <a href="<?= base_url($akun['link']); ?>" class="dropdown-item notify-item">
+                                        <i class="<?= $akun['icon']; ?>"></i> <span><?= $akun['label']; ?></span>
+                                    </a>
+                                <?php endforeach ?>
 
                             </div>
                         </li>
@@ -121,7 +107,7 @@
         </div>
         <!-- end topbar-main -->
         <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-        <?php echo ($isHome) ? $this->include($vMenu) : ''; ?>
+        <?php echo ($showMenu || $userGroup == 'super' || $userGroup == 'admin') ? $this->include($vMenu) : ''; ?>
         <!-- end navbar-custom -->
 
     </header>
@@ -164,8 +150,8 @@
                 <div class="col-sm-12">
                     <div class="page-title-box">
                         <div class="d-flex">
-                            <?php if ($isHome == false) : ?>
-                                <a href="javascript:history.back()" class="mr-2 text-danger"><i class="icon-arrow-left-circle"></i></a>
+                            <?php if ($showBack) : ?>
+                                <a href="<?= base_url($backLink); ?>" class="mr-2 text-danger"><i class="icon-arrow-left-circle"></i></a>
                             <?php endif ?>
                             <h4 class="page-title"><?= $judulPage; ?></h4>
                         </div>
@@ -211,13 +197,13 @@
     <!-- App js -->
     <script src="<?= $template; ?>/assets/js/jquery.core.js"></script>
     <script src="<?= $template; ?>/assets/js/jquery.app.js"></script>
+    <?= $this->renderSection('skrip'); ?>
 
     <script>
         $(document).ready(function() {
             $('.loading').hide();
         })
     </script>
-    <?= $this->renderSection('skrip'); ?>
 
 
 </body>

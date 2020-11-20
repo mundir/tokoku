@@ -4,22 +4,34 @@
             <!-- Navigation Menu-->
             <ul class="navigation-menu">
 
-                <li class="has-submenu">
-                    <a href="index.html"><i class="icon-home"></i>Home</a>
-                </li>
-
-                <li class="has-submenu">
-                    <a href="#"><i class="icon-layers"></i>Data</a>
+                <li class="has-submenu<?= ($aktif == 'pesanan') ? ' active' : ''; ?>">
+                    <a href="#"><i class="icon-home"></i>Pesanan</a>
                     <ul class="submenu">
-                        <li><a href="<?= base_url('admin/pengguna'); ?>">Pengguna</a></li>
-                        <li><a href="<?= base_url('admin/barang'); ?>">Barang</a></li>
-                        <li><a href="<?= base_url('admin/transaksi'); ?>">Transaksi</a></li>
-                        <li><a href="<?= base_url('admin/pengiriman'); ?>">Pengiriman</a></li>
+                        <li <?= ($subAktif == 'ambil') ? 'class="active"' : ''; ?>><a href="<?= base_url('admin/home/index'); ?>">Pesanan Ambil di Toko</a></li>
+                        <li <?= ($subAktif == 'kirim') ? 'class="active"' : ''; ?>><a href="<?= base_url('admin/home/kirim'); ?>">Pesanan untuk Dikirim</a></li>
+                        <li <?= ($subAktif == 'bayar') ? 'class="active"' : ''; ?>><a href="<?= base_url('admin/home/pembayaran'); ?>">Proses Pembayaran</a></li>
+                        <li <?= ($subAktif == 'selesai') ? 'class="active"' : ''; ?>><a href="<?= base_url('admin/home/selesai'); ?>">Pesanan Selesai</a></li>
                     </ul>
                 </li>
 
-                <li class="has-submenu">
-                    <a href="<?= base_url('admin/akun/profilku'); ?>"><i class="icon-user"></i>Akun</a>
+                <li class="has-submenu<?= ($aktif == 'kategori') ? ' active' : ''; ?>">
+                    <a href="#"><i class="icon-layers"></i>Data Barang</a>
+                    <ul class="submenu">
+                        <?php foreach ($dtKategori as $kat) : ?>
+                            <li><a href="<?= base_url('admin/barang/tampilkan/' . $kat->id); ?>"><?= $kat->nama_kategori; ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+                <li class="has-submenu<?= ($aktif == 'pengguna') ? ' active' : ''; ?>">
+                    <a href="#"><i class="icon-user"></i>Pengguna</a>
+                    <ul class="submenu">
+                        <li <?= ($subAktif == 'admin') ? 'class="active"' : ''; ?>><a href="<?= base_url('admin/pengguna/index'); ?>">Admin</a></li>
+                        <li <?= ($subAktif == 'customer') ? 'class="active"' : ''; ?>><a href="<?= base_url('admin/pengguna/customer'); ?>">Customer</a></li>
+                    </ul>
+                </li>
+
+                <li class="has-submenu<?= ($aktif == 'akun') ? ' active' : ''; ?>">
+                    <a href="<?= base_url('admin/akun'); ?>"><i class="icon-user"></i>Akun</a>
                 </li>
 
 

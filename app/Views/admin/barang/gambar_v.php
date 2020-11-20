@@ -1,4 +1,4 @@
-<?= $this->extend('layoutAdmin_v') ?>
+<?= $this->extend('layout_v') ?>
 
 <?= $this->section('mycss') ?>
 <!-- Bootstrap fileupload css -->
@@ -9,21 +9,30 @@
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <div class="card-box">
+            <?php if ($pesanError) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $pesanError; ?>
+                </div>
+            <?php endif ?>
             <div>
-                <?php $hidden = ['id' => $dataTabel->id] ?>
+                <?php $hidden = [
+                    'id' => $dataTabel->id,
+                    'id_kategori' => $dataTabel->id_kategori,
+                ] ?>
                 <?= form_open_multipart('admin/barang/upload', ['class' => 'form-horizontal'], $hidden); ?>
 
                 <div class="form-group row">
-                    <?= form_label('Cari Gambar', 'gambar', ['class' => 'col-md-2 col-form-label']); ?>
-                    <div class="col-md-10">
-                        <input type="file" name="gambar" onchange=previewFile() />
+                    <?= form_label('Cari Gambar', 'gambar', ['class' => 'col-md-4 col-form-label']); ?>
+                    <div class="col-md-8">
+                        <input id="gambar" type="file" style="overflow:hidden" name="gambar" onchange=previewFile() />
 
                         <img id="previewImg" src="<?= base_url('img') . '/' . $dataTabel->gambar; ?>" alt="preview" class="img-fluid mt-3">
                     </div>
                 </div>
-
-
-                <?= form_submit('submit', $submit, ['class' => 'btn btn-primary']); ?>
+                <hr>
+                <div class="text-right">
+                    <?= form_submit('submit', $submit, ['class' => 'btn btn-primary']); ?>
+                </div>
                 <?= form_close(); ?>
 
             </div>

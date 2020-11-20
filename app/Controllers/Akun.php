@@ -45,13 +45,13 @@ class Akun extends Controller
             ];
             $session->set($dtses);
             switch ($tabel->user_group) {
-                case '1':
+                case 'super':
                     return redirect()->to(base_url('admin/home'));
                     break;
-                case '2':
+                case 'admin':
                     return redirect()->to(base_url('admin/home'));
                     break;
-                case '3':
+                case 'cust':
                     return redirect()->to(base_url('home'));
                     break;
             }
@@ -97,7 +97,7 @@ class Akun extends Controller
     public function logout()
     {
         $this->session->destroy();
-        return redirect()->to('login');
+        return redirect()->to('index');
     }
 
     function myid($awalan = "AJ", $strength = 4)

@@ -1,7 +1,6 @@
-<?= $this->extend('layoutAdmin_v') ?>
+<?= $this->extend('layout_v') ?>
 
 <?= $this->section('mycss') ?>
-<!-- <link rel="stylesheet" href="<?= base_url('mycss/main.css'); ?>"> -->
 <?= $this->endSection(); ?>
 
 <?= $this->section('content') ?>
@@ -13,7 +12,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="p-20">
-                        <?= form_open('admin/barang/tampilkan', 'class="form-horizontal"'); ?>
+                        <?= form_open('admin/barang/sesskategori', 'class="form-horizontal"'); ?>
                         <div class="form-group row">
                             <label class="col-3 col-form-label">Kategori</label>
                             <div class="col-9">

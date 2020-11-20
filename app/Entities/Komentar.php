@@ -6,5 +6,4 @@ use CodeIgniter\Entity;
 
 class Komentar extends Entity
 {
-    //
 }

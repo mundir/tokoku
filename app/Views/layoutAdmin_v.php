@@ -66,7 +66,7 @@
 
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="<?= $template; ?>/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"><?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="<?= $template; ?>/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">ADMIN<?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <!-- item-->

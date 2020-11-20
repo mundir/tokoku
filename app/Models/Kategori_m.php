@@ -12,7 +12,7 @@ class Kategori_m extends Model
     protected $returnType     = 'App\Entities\Kategori';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nama_kategori', 'group_kategori'];
+    protected $allowedFields = ['id', 'nama_kategori', 'group_kategori'];
 
     protected $useTimestamps = false;
 

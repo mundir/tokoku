@@ -8,51 +8,73 @@ class Home extends BaseController
 	public function index()
 	{
 		$this->data['judulPage'] = 'Hai, ' . $this->data['nama'];
-		$this->data['isLogin'] = false;
-		if ($this->data['guest'] == false) {
-			$keranjangModel = new \App\Models\Keranjang_m();
-			$totalKeranjang = $keranjangModel->where('id_customer', $this->data['idPengguna'])->countAllResults();
-			$this->session->set('jumlahKeranjang', $totalKeranjang);
-			$this->data['jumlahKeranjang'] = $totalKeranjang;
-			$this->data['isLogin'] = true;
+		if ($this->session->has('isLogin')) {
+			$jumlahKeranjang = $this->totalkeranjang();
+
+			$this->session->set('jumlahKeranjang', $jumlahKeranjang);
+			$this->data['jumlahKeranjang'] = $jumlahKeranjang;
 		}
 
-		$kategoriModel = new \App\Models\Kategori_m();
-		$dtKategori = $kategoriModel->findAll();
 		$barangModel = new \App\Models\Barang_m();
 
-		foreach ($dtKategori as $rowKategori) {
+		foreach ($this->data['dtKategori'] as $rowKategori) {
 			$barang[$rowKategori->id] = $barangModel->where('id_kategori', $rowKategori->id)->get()->getResult();
 		}
 
 		$data = [
 			'dtBarang' => $barang,
-			'dtKategori' => $dtKategori,
-			'isHome' => true
+			'showMenu' => true,
+			'showKeranjang' => true,
+			'showBack' => false,
+			'aktif' => 'home'
 		];
 		$data = array_merge($this->data, $data);
-
 		return view('main_v', $data);
 	}
 
-	public function keranjang()
+	public function kategori($id_kategori)
 	{
-		$idCustomer = $this->session->get('id');
-		$keranjangModel = new \App\Models\Keranjang_m();
-		$dtKeranjang = $keranjangModel
-			->select('keranjang.*,barang.*')
-			->join('barang', 'keranjang.id_barang=barang.id')
-			->where('id_customer', $idCustomer)
-			->get()->getResult();
+		$kategoriModel = new \App\Models\Kategori_m();
+		$dtKategori = $kategoriModel->find($id_kategori);
+		$this->data['judulPage'] = $dtKategori->nama_kategori;
+		$modelBarang = new \App\Models\Barang_m();
+		$tbBarang = $modelBarang->where('id_kategori', $id_kategori);
+		$this->data['idKategori'] = $id_kategori;
+		$this->data['dtMain'] = $tbBarang->paginate(6, 'group1');
+		$this->data['pager'] = $tbBarang->pager;
+		$this->data['aktif'] = 'kategori';
 		$data = [
-			'judulPage' => "Keranjang Belanja",
-			'jumlahKeranjang' => $this->totalKeranjang,
-			'dtKeranjang' => $dtKeranjang,
-		];
-		$data = array_merge($data, $this->data);
+			'showMenu' => true,
+			'showKeranjang' => true,
+			'showBack' => true,
 
-		return view('keranjang_v', $data);
+		];
+		$this->data = array_merge($this->data, $data);
+		return view('barangKategori_v', $this->data);
 	}
+	public function cari()
+	{
+		$post = $this->request->getPost();
+		$modelBarang = new \App\Models\Barang_m();
+		$tbBarang = $modelBarang
+			->where('id_kategori', $post['id_kategori'])
+			->like('nama_barang', $post['txt-cari'])
+			->get()->getResult();
+		if ($tbBarang) {
+			$data = [
+				'judulPage' => 'Hasil Cari',
+				'dtBarang' => $tbBarang,
+				'showMenu' => true,
+				'showKeranjang' => true,
+				'showBack' => true,
+				'aktif' => 'kategori',
+				'backLink' => 'home/kategori/' . $post['id_kategori']
+			];
+			$this->data = array_merge($this->data, $data);
+			return view('barangCari_v', $this->data);
+		}
+	}
+
 	function ambil_data()
 	{
 		$post = $this->request->getPost();
@@ -67,7 +89,7 @@ class Home extends BaseController
 
 		$post = $this->request->getPost();
 		$id_barang = $post['id'];
-
+		$totalKeranjang = $this->session->get('jumlahKeranjang');
 		$model = new \App\Models\Keranjang_m();
 		$ntt = new \App\Entities\Keranjang();
 		$ntt->id_barang = $id_barang;
@@ -78,7 +100,8 @@ class Home extends BaseController
 			$ntt->id = $newID;
 			$ntt->qty = 1;
 			$model->insert($ntt);
-			$this->data['jumlahKeranjang']++;
+			$totalKeranjang++;
+			$this->session->set('jumlahKeranjang', $totalKeranjang);
 		} else {
 			$IDlama = $tbKeranjang->id;
 			$ntt->id = $IDlama;
@@ -88,8 +111,7 @@ class Home extends BaseController
 			$ntt->qty = $qty;
 			$model->save($ntt);
 		}
-
-		echo $this->data['jumlahKeranjang'];
+		echo $totalKeranjang;
 	}
 
 	//--------------------------------------------------------------------

@@ -67,12 +67,5 @@
 }
 
 .terjual {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: rgba(0, 0, 0, .87);
-    padding-left: .1875rem;
-    font-family: -apple-system, Helvetica Neue, Helvetica, Roboto, Droid Sans, Arial, sans-serif;
-    font-weight: 400;
     font-size: .625rem;
 }

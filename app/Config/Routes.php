@@ -31,14 +31,20 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
 $routes->get('/', 'Home::index');
 $routes->get('tamu', 'Home::index');
 $routes->get('login', 'Akun::index');
 $routes->get('registrasi', 'Akun::registrasi');
 $routes->get('logout', 'Akun::logout');
-$routes->post('detail_barang', 'Home::ambil_data');
-$routes->post('guest_ambil_data', 'Guest::ambil_data');
+$routes->get('kategori', 'Home::kategori');
+$routes->post('cari/detail', 'Home::ambil_data');
+$routes->post('home/kategori/detail_barang', 'Home::ambil_data');
+$routes->post('home/cari/detail_barang', 'Home::ambil_data');
 $routes->post('beli', 'Home::tambah_keranjang');
+$routes->post('home/kategori/beli', 'Home::tambah_keranjang');
+$routes->post('cari', 'Home::cari');
+$routes->post('detail_barang', 'Home::ambil_data');
 
 /**
  * --------------------------------------------------------------------

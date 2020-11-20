@@ -13,8 +13,7 @@
             <h4 class="m-t-0 header-title text-danger">Tidak Ada Data</h4>
             <p><?= $keterangan; ?></p>
             <div class="card-footer text-right">
-                <a href="<?= $mainCtrl; ?>" class="btn btn-light"> Kembali </a>
-                <a href="<?= $mainCtrl . '/tambah'; ?>" class="btn btn-primary"> <?= $labelProses; ?> </a>
+                <a href="<?= $mainCtrl . '/input_data'; ?>" class="btn btn-primary"> <?= $labelProses; ?> </a>
             </div>
         </div>
     </div>
