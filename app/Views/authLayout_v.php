@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="<?= base_url('template/vertical'); ?>/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url('logo'); ?>/favicon.ico">
 
     <!-- App css -->
     <link href="<?= base_url('template/vertical'); ?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -35,22 +35,25 @@
 
                 <div class="account-box">
 
-                    <div class="card-box p-5">
-                        <h2 class="text-uppercase text-center pb-4">
-                            <a href="index.html" class="text-success">
-                                <span><img src="<?= base_url('template/vertical'); ?>/assets/images/logo.png" alt="" height="26"></span>
+                    <div class="card-box pt-5">
+                        <h5 class="text-center">
+                            Selamat Datang di
+                        </h5>
+                        <div class="text-center mb-5">
+                            <a href="index.html">
+                                <span><img src="<?= base_url('logofamili/logoLogin.png'); ?>" alt="logo"></span>
                             </a>
-                        </h2>
+                        </div>
 
                         <?= $this->renderSection('content'); ?>
 
-
+                        <div class="m-t-40 text-center text-muted account-copyright">
+                            <p class="text-muted">2020-2021 © amanahjaya-dev - familimart.net</p>
+                        </div>
 
                     </div>
                 </div>
-                <div class="m-t-40 text-center account-copyright">
-                    <p>2018 © Highdmin. - Coderthemes.com</p>
-                </div>
+
             </div>
         </div>
 

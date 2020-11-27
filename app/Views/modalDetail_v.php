@@ -37,7 +37,7 @@
             </div>
             <div class="gg-detail">
                 <!-- <div style="background-image: url('img/printer-laser.jpg'); background-size: contain; background-repeat: no-repeat;"></div> -->
-                <img id="img-img" src="<?= base_url('img/printer-laser.jpg'); ?>" class="img-detail" alt="Foto Barang">
+                <img id="img-img" src="#" class="img-detail" alt="Foto Barang">
             </div>
             <div class="modal-body">
                 <h4 id="dt_nama_barang">Beras Merk Rose Brand 10KG Bisa COD gratis Ongkir selamanya</h4>
@@ -58,11 +58,11 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
-                <?php if ($userGroup != '0') : ?>
+                <!-- <?php if ($userGroup != '0') : ?>
                     <button id="btn-modal-beli" onclick="xx()" type="button" class="btn btn-sm btn-danger waves-effect waves-light">Beli</button>
                 <?php else : ?>
                     <button onclick="silahkan_login()" type="button" class="btn btn-sm btn-danger waves-effect waves-light">Beli</button>
-                <?php endif ?>
+                <?php endif ?> -->
 
             </div>
         </div><!-- /.modal-content -->

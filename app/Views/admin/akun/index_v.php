@@ -1,9 +1,9 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 <?= $this->section('content') ?>
 <div class="row">
     <div class="col-md-4">
         <div class="card m-b-30">
-            <img class="card-img-top img-fluid" src="<?= base_url('img/profil/kotak/' . $dataTabel->avatar); ?>" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="<?= base_url('profil/detail/' . $dataTabel->avatar); ?>" alt="Card image cap">
             <div class="card-body text-right">
                 <a href="<?= base_url('admin/akun/ganti_foto'); ?>" class="btn btn-custom waves-effect waves-light">Ganti Foto</a>
             </div>
@@ -12,9 +12,9 @@
     <div class="col-md-8 mb-0">
         <div class="card-box">
             <dl class="row">
-                <!-- 'username',  -->
-                <dt class="col-sm-3">Username</dt>
-                <dd class="col-sm-9"><?= $dataTabel->username; ?></dd>
+                <!-- 'nama_pendek',  -->
+                <dt class="col-sm-3">nama_pendek</dt>
+                <dd class="col-sm-9"><?= $dataTabel->nama_pendek; ?></dd>
                 <!-- 'password',  -->
                 <dt class="col-sm-3">Password</dt>
                 <dd class="col-sm-9"><?= $dataTabel->password; ?></dd>

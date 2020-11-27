@@ -33,10 +33,9 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->get('/', 'Home::index');
-$routes->get('tamu', 'Home::index');
-$routes->get('login', 'Akun::index');
-$routes->get('registrasi', 'Akun::registrasi');
-$routes->get('logout', 'Akun::logout');
+$routes->get('login', 'Auth::Login');
+$routes->get('registrasi', 'Auth::regis');
+$routes->get('logout', 'Auth::logout');
 $routes->get('kategori', 'Home::kategori');
 $routes->post('cari/detail', 'Home::ambil_data');
 $routes->post('home/kategori/detail_barang', 'Home::ambil_data');

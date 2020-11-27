@@ -25,6 +25,7 @@ class Akun extends Controller
         $this->data['urlProses'] = 'akun/proses_login';
         $this->data['pesanError'] = $this->session->getFlashdata('pesanError');
         $data = $this->data;
+        return view('welcome_v', $data);
         return view('authLogin_v', $data);
     }
 
@@ -71,15 +72,23 @@ class Akun extends Controller
         return view('authRegistrasi_v', $data);
     }
 
+    public function user_reg()
+    {
+        $this->data['judulPage'] = 'Halaman Awal';
+        $this->data['pesanError'] = $this->session->getFlashdata('pesanError');
+        $this->data['validasi'] = $this->validasi;
+        $data = $this->data;
+        return view('authUserReg_v', $data);
+    }
+
     public function registrasi_proses()
     {
         $rls = [
-            'username' => 'required|alpha_numeric|is_unique[pengguna.username]',
             'password' => 'required',
             'repassword' => 'required|matches[password]',
             'nomor_hp' => 'required|numeric|is_unique[pengguna.nomor_hp]',
-            'email' => 'required|valid_email',
             'nama_pengguna' => 'required|min_length[5]',
+            'referensi' => 'required'
         ];
         if ($this->validate($rls) == false) {
             return redirect()->to('registrasi')->withInput();

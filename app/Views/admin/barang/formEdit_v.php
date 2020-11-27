@@ -1,4 +1,4 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 
 <?= $this->section('mycss') ?>
 <link href="<?= base_url('template'); ?>/plugins/jquery-te-1.4.0.css" rel="stylesheet" type="text/css" />

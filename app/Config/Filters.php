@@ -13,7 +13,7 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-		'cekLogin' => \App\Filters\CekLogin::class,
+		'myfilter' => \App\Filters\AuthFilter::class,
 	];
 
 	// Always applied before every request
@@ -21,7 +21,7 @@ class Filters extends BaseConfig
 		'before' => [
 			//'honeypot'
 			// 'csrf',
-			'cekLogin' => ['except' => ['login', 'registrasi', 'logout', 'home', 'kategori', 'home/kategori/*', '/', 'cari', 'tamu', 'home/kategori/detail_barang', 'home/cari/detail_barang', 'detail_barang', 'beli', 'akun/*']]
+			'myfilter' => ['except' => ['auth', 'auth/*', 'login', 'registrasi', 'logout', 'home', 'kategori', 'home/kategori/*', '/', 'cari', 'tamu', 'home/kategori/detail_barang', 'home/cari/detail_barang', 'detail_barang', 'beli', 'akun/*']]
 		],
 		'after'  => [
 			'toolbar',

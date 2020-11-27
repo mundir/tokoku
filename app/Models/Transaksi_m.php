@@ -13,7 +13,7 @@ class Transaksi_m extends Model
     protected $useSoftDeletes = false;
     protected $allowedFields = [
         'id', 'id_pembeli', 'harga_barang',
-        'biaya_penanganan', 'biaya_pengiriman', 'total_harga',
+        'diskon', 'biaya_pengiriman', 'total_harga',
         'keterangan', 'cara_bayar', 'cara_kirim', 'status_bayar', 'status_proses', 'expired_at'
     ];
 

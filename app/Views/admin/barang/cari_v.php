@@ -1,4 +1,4 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 
 <?= $this->section('mycss') ?>
 <link rel="stylesheet" href="<?= base_url('mycss/main.css'); ?>">

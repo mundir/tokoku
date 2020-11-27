@@ -6,7 +6,30 @@
         <?= $pesanError; ?>
     </div>
 <?php endif;  ?>
-<?= form_open('akun/registrasi_proses'); ?>
+<?= form_open('auth/regis_proses'); ?>
+<!-- nomor_hp -->
+<?php
+$fld = 'nomor_hp';
+$label = 'Nomor WA <small>pastikan nomor WA aktif</small>';
+$class = ($validasi->hasError($fld)) ? 'form-control is-invalid' : 'form-control';
+$extra = [
+    'id' => $fld,
+    'class' => $class,
+];
+$val = (old($fld) != null) ? old($fld) : '';
+$err = $validasi->getError($fld);
+?>
+<div class="form-group row m-b-20">
+    <div class="col-12">
+        <?= form_label($label, $fld); ?>
+        <?= form_input($fld, $val, $extra); ?>
+        <div class="invalid-feedback">
+            <?= $err ?>
+        </div>
+    </div>
+</div>
+
+<!-- nama -->
 <?php
 $fld = 'nama_pengguna';
 $class = ($validasi->hasError($fld)) ? 'form-control is-invalid' : 'form-control';
@@ -20,52 +43,6 @@ $err = $validasi->getError($fld);
 <div class="form-group row m-b-20">
     <div class="col-12">
         <?= form_label('Nama', $fld); ?>
-        <?= form_input($fld, $val, $extra); ?>
-        <div class="invalid-feedback">
-            <?= $err ?>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- nomor_hp -->
-<?php
-$fld = 'nomor_hp';
-$label = 'Nomor HP';
-$class = ($validasi->hasError($fld)) ? 'form-control is-invalid' : 'form-control';
-$extra = [
-    'id' => $fld,
-    'class' => $class,
-];
-$val = (old($fld) != null) ? old($fld) : '';
-$err = $validasi->getError($fld);
-?>
-<div class="form-group row m-b-20">
-    <div class="col-12">
-        <?= form_label($label, $fld); ?>
-        <?= form_input($fld, $val, $extra); ?>
-        <div class="invalid-feedback">
-            <?= $err ?>
-        </div>
-    </div>
-</div>
-
-<!-- username -->
-<?php
-$fld = 'username';
-$label = 'Username';
-$class = ($validasi->hasError($fld)) ? 'form-control is-invalid' : 'form-control';
-$extra = [
-    'id' => $fld,
-    'class' => $class,
-];
-$val = (old($fld) != null) ? old($fld) : '';
-$err = $validasi->getError($fld);
-?>
-<div class="form-group row m-b-20">
-    <div class="col-12">
-        <?= form_label($label, $fld); ?>
         <?= form_input($fld, $val, $extra); ?>
         <div class="invalid-feedback">
             <?= $err ?>
@@ -117,50 +94,15 @@ $err = $validasi->getError($fld);
     </div>
 </div>
 
-<!-- email -->
-<?php
-$fld = 'email';
-$label = 'Email';
-$class = ($validasi->hasError($fld)) ? 'form-control is-invalid' : 'form-control';
-$extra = [
-    'id' => $fld,
-    'class' => $class,
-];
-$val = (old($fld) != null) ? old($fld) : '';
-$err = $validasi->getError($fld);
-?>
-<div class="form-group row m-b-20">
-    <div class="col-12">
-        <?= form_label($label, $fld); ?>
-        <?= form_input($fld, $val, $extra); ?>
-        <div class="invalid-feedback">
-            <?= $err ?>
-        </div>
-    </div>
+
+<div class="px-5 mb-3">
+    <button class="btn btn-block btn-success waves-effect waves-light" type="submit">Registrasi</button>
 </div>
 
-<!-- alamat -->
-<?= form_hidden('alamat', '-'); ?>
-<!-- kab_kota -->
-<?= form_hidden('kab_kota', 'Kab. Malang'); ?>
-<!-- kodepos -->
-<?= form_hidden('kodepos', '65171'); ?>
-<!-- user_group -->
-<?= form_hidden('user_group', '3'); ?>
-<!-- avatar -->
-<?= form_hidden('avatar', 'default.jpg'); ?>
+<?= form_close(); ?>
 
-
-<div class="form-group row text-center m-t-10">
-    <div class="col-12">
-        <button class="btn btn-block btn-custom waves-effect waves-light" type="submit">Registrasi</button>
-    </div>
-</div>
-
-</form>
-<div class="row m-t-50">
-    <div class="col-sm-12 text-center">
-        <p class="text-muted">Saya sudah punya akun! <a href="<?= base_url('akun'); ?>" class="text-dark m-l-5"><b>Login</b></a></p>
-    </div>
+<div class="text-center">
+    <p class="text-muted">Saya sudah punya Akun! <a href="<?= base_url('auth/login'); ?>" class="text-danger m-l-5"><b>Login</b></a></p>
+    <a class="text-success" href="https://wa.me/6281249565788?text=Amanahjaya%0ASaya%20ingin%20dibantu%20untuk%20registrasi%20nomor%20WA%20ini">-- Bantuan Whatsapp --</a>
 </div>
 <?= $this->endSection(); ?>

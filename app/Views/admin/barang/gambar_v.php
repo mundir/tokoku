@@ -1,4 +1,4 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 
 <?= $this->section('mycss') ?>
 <!-- Bootstrap fileupload css -->
@@ -20,15 +20,16 @@
                     'id_kategori' => $dataTabel->id_kategori,
                 ] ?>
                 <?= form_open_multipart('admin/barang/upload', ['class' => 'form-horizontal'], $hidden); ?>
-
-                <div class="form-group row">
+                <h5><?= $dataTabel->nama_barang; ?></h5>
+                <div class="form-group">
                     <?= form_label('Cari Gambar', 'gambar', ['class' => 'col-md-4 col-form-label']); ?>
                     <div class="col-md-8">
                         <input id="gambar" type="file" style="overflow:hidden" name="gambar" onchange=previewFile() />
 
-                        <img id="previewImg" src="<?= base_url('img') . '/' . $dataTabel->gambar; ?>" alt="preview" class="img-fluid mt-3">
+                        <img id="previewImg" src="<?= base_url('img/detail') . '/' . $dataTabel->gambar; ?>" alt="preview" class="img-fluid mt-3">
                     </div>
                 </div>
+
                 <hr>
                 <div class="text-right">
                     <?= form_submit('submit', $submit, ['class' => 'btn btn-primary']); ?>

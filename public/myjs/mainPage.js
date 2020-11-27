@@ -12,9 +12,10 @@
         });
         xambil.done(function(data) {
             var mydata = JSON.parse(data);
-            $("#img-img").attr('src', 'img/' + mydata.gambar);
+            
+            $("#img-img").attr('src', mydata.pGambar);
             $("#dt_nama_barang").text(mydata.nama_barang);
-            $("#dt_harga").text(mydata.harga);
+            $("#dt_harga").text("Rp " + mydata.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
             $("#dt_stok").text(mydata.stok);
             $("#dt_deskripsi").html("<p>" + mydata.deskripsi + "</p>");
             $("#btn-modal-beli").attr("onclick", "beli('" + mydata.id + "')");

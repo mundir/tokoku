@@ -1,4 +1,4 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 
 <?= $this->section('content') ?>
 <style>
@@ -42,7 +42,7 @@
                                 <tr>
                                     <th scope="row"><?= $hitung; ?></th>
                                     <td><?= $row->id; ?></td>
-                                    <?php if ($row->status_kirim == 0) : ?>
+                                    <?php if ($row->status_proses == 0) : ?>
                                         <td class="text-danger">...</td>
                                     <?php else : ?>
                                         <td class="text-success">OK</td>

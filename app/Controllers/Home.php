@@ -4,10 +4,13 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-
+	public function __construct()
+	{
+		$this->folderView = 'home/';
+	}
 	public function index()
 	{
-		$this->data['judulPage'] = 'Hai, ' . $this->data['nama'];
+		$this->data['judulPage'] = 'Assalamualaikum, ' . $this->data['nama'];
 		if ($this->session->has('isLogin')) {
 			$jumlahKeranjang = $this->totalkeranjang();
 
@@ -18,7 +21,7 @@ class Home extends BaseController
 		$barangModel = new \App\Models\Barang_m();
 
 		foreach ($this->data['dtKategori'] as $rowKategori) {
-			$barang[$rowKategori->id] = $barangModel->where('id_kategori', $rowKategori->id)->get()->getResult();
+			$barang[$rowKategori->id] = $barangModel->where('id_kategori', $rowKategori->id)->get(6, 1)->getResult();
 		}
 
 		$data = [
@@ -29,7 +32,7 @@ class Home extends BaseController
 			'aktif' => 'home'
 		];
 		$data = array_merge($this->data, $data);
-		return view('main_v', $data);
+		return view($this->folderView . 'main_v', $data);
 	}
 
 	public function kategori($id_kategori)
@@ -40,7 +43,7 @@ class Home extends BaseController
 		$modelBarang = new \App\Models\Barang_m();
 		$tbBarang = $modelBarang->where('id_kategori', $id_kategori);
 		$this->data['idKategori'] = $id_kategori;
-		$this->data['dtMain'] = $tbBarang->paginate(6, 'group1');
+		$this->data['dtMain'] = $tbBarang->paginate(12, 'group1');
 		$this->data['pager'] = $tbBarang->pager;
 		$this->data['aktif'] = 'kategori';
 		$data = [
@@ -50,7 +53,7 @@ class Home extends BaseController
 
 		];
 		$this->data = array_merge($this->data, $data);
-		return view('barangKategori_v', $this->data);
+		return view($this->folderView . 'barangKategori_v', $this->data);
 	}
 	public function cari()
 	{
@@ -71,7 +74,7 @@ class Home extends BaseController
 				'backLink' => 'home/kategori/' . $post['id_kategori']
 			];
 			$this->data = array_merge($this->data, $data);
-			return view('barangCari_v', $this->data);
+			return view($this->folderView . 'barangCari_v', $this->data);
 		}
 	}
 
@@ -80,6 +83,8 @@ class Home extends BaseController
 		$post = $this->request->getPost();
 		$barangModel = new \App\Models\Barang_m();
 		$row = $barangModel->find($post['id']);
+		$gambar = $row->gambar;
+		$row->pGambar = base_url('img/detail/' . $gambar);
 		echo json_encode($row);
 	}
 

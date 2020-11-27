@@ -6,12 +6,12 @@
     <title><?= $judulWeb; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content="Menjual segala kebutuhan anda secara online, mudah dan praktis." name="description" />
-    <meta content="AmanahJaya" name="mundir_muzaini" />
+    <meta content="author" name="mundir_muzaini" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <?php $template = base_url('template/horizontal') ?>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="<?= $template; ?>/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url('logofamili/favicon.ico'); ?>">
 
     <!-- App css -->
     <!-- Bootstrap CSS -->
@@ -21,6 +21,11 @@
 
     <script src="<?= $template; ?>/assets/js/modernizr.min.js"></script>
     <?= $this->renderSection('mycss'); ?>
+    <style>
+        .navbar-hijau {
+            background-color: #00933d;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,8 +44,8 @@
                         </a> -->
                     <!-- Image Logo -->
                     <a href="<?= base_url($homepg); ?>" class="logo">
-                        <img src="<?= $template; ?>/assets/images/logo_sm.png" alt="" height="26" class="logo-small">
-                        <img src="<?= $template; ?>/assets/images/logo.png" alt="" height="22" class="logo-large">
+                        <img src="<?= base_url('logofamili/logo_hijau_283.jpg'); ?>" alt="" height="30" class="logo-small">
+                        <img src="<?= base_url('logofamili/logo_hijau_283.jpg'); ?>" alt="" height="36" class="logo-large">
                     </a>
 
                 </div>
@@ -86,7 +91,7 @@
                         <?php endif ?>
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="<?= base_url('img/profil/' . $avatar) ?>" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"><?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="<?= base_url('profil/thumb/' . $avatar) ?>" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"><?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <?php foreach ($akuns as $akun) : ?>

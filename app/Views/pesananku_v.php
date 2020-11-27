@@ -49,7 +49,7 @@
                     <?php $total_barang = 0 ?>
                     <?php foreach ($item['detail'] as $rowDetail) : ?>
                         <li class="list-group list-group-flush item-gbr d-flex flex-row">
-                            <img src="<?= base_url('img/' . $rowDetail->gambar); ?>" alt="" class="img-thumbnail gbrku mr-2">
+                            <img src="<?= base_url('img/preview/' . $rowDetail->gambar); ?>" alt="" class="img-thumbnail gbrku mr-2">
                             <div class="brg-ket flex-fill">
                                 <p class="mt-0 mb-1"><?= $rowDetail->nama_barang; ?></p>
                                 <?php $subTotal = $rowDetail->harga * $rowDetail->qty; ?>

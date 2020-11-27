@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 class Keranjang extends BaseController
 {
+    public function __construct()
+    {
+        $this->folderView = 'keranjang/';
+    }
     public function index()
     {
         $idCustomer = $this->session->get('id');
@@ -23,7 +27,7 @@ class Keranjang extends BaseController
         ];
         $data = array_merge($this->data, $data);
 
-        return view('keranjang_v', $data);
+        return view($this->folderView . 'keranjang_v', $data);
     }
 
     public function proses()
@@ -40,7 +44,7 @@ class Keranjang extends BaseController
         foreach ($indexCbk as $x) {
             $x -= 1;
             $idBarang = $post['id_barang'][$x];
-            echo $idBarang;
+
             $idKeranjang = $post['id_keranjang'][$x];
             $arrData[] = ['id_keranjang' => $idKeranjang, 'barang' => $barangModel->find("$idBarang"), 'qty' => $post['qty'][$x]];
             $keranjangNtt->id = $idKeranjang;
@@ -52,11 +56,13 @@ class Keranjang extends BaseController
         $data = [
             'judulPage' => "Checkout",
             'dataTabel' => $arrData,
-            'dataCust' => $cust
+            'aktif' => 'keranjang',
+            'dataCust' => $cust,
+            'backLink' => 'keranjang'
         ];
 
         $data = array_merge($this->data, $data);
-        return view('checkoutWizard_v', $data);
+        return view($this->folderView . 'checkout_v', $data);
     }
 
     public function buat_pesanan()

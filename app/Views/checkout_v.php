@@ -15,7 +15,7 @@
                 <?php foreach ($dataTabel as $row) : ?>
                     <tr>
                         <td>
-                            <img src="<?= base_url('img/' . $row['barang']->gambar) ?>" alt="gambar" class="thumb-md">
+                            <img src="<?= base_url('img/thumb/' . $row['barang']->gambar) ?>" alt="gambar" class="thumb-md">
                         </td>
 
                         <td style="position: relative;">

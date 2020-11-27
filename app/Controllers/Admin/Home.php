@@ -22,7 +22,7 @@ class Home extends \App\Controllers\BaseController
         $model = new \App\Models\Transaksi_m();
         $this->data['dtTabel'] = $model
             ->where('cara_kirim', 'ambil')
-            ->where('status_selesai', 0)
+            ->where('status_selesai', 'proses')
             ->get()->getResult();
 
         return view('admin/home_v', $this->data);
@@ -40,7 +40,7 @@ class Home extends \App\Controllers\BaseController
         $model = new \App\Models\Transaksi_m();
         $this->data['dtTabel'] = $model
             ->where('cara_kirim', 'kirim')
-            ->where('status_selesai', 0)
+            ->where('status_selesai', 'proses')
             ->get()->getResult();
 
         return view('admin/home_v', $this->data);

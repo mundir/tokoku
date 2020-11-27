@@ -5,159 +5,224 @@
     <meta charset="utf-8" />
     <title><?= $judulWeb; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
+    <meta content="Menjual segala kebutuhan anda secara online, mudah dan praktis." name="description" />
+    <meta content="mundir_muzaini" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="<?= $template; ?>/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url('logofamili/favicon.ico'); ?>">
 
     <!-- App css -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="<?= base_url('template/vertical'); ?>/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('template/vertical'); ?>/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('template/vertical'); ?>/assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('template/vertical'); ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
 
-    <link href="<?= $template; ?>/assets/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="<?= $template; ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/modernizr.min.js"></script>
 
-    <script src="<?= $template; ?>/assets/js/modernizr.min.js"></script>
     <?= $this->renderSection('mycss'); ?>
+    <style>
+        .loading {
+            position: fixed;
+            z-index: 999;
+
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Transparent Overlay */
+        .loading::before {
+            content: '';
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+
 </head>
+
 
 <body>
 
-    <!-- Navigation Bar-->
-    <header id="topnav">
-        <div class="topbar-main">
-            <div class="container-fluid">
+    <!-- Begin page -->
+    <div id="wrapper">
+        <div class="loading">
+            <div class="spinner-border"></div>
+        </div>
 
-                <!-- Logo container-->
-                <div class="logo">
-                    <!-- Text Logo -->
-                    <!-- <a href="index.html" class="logo">
-                            <span class="logo-small"><i class="mdi mdi-radar"></i></span>
-                            <span class="logo-large"><i class="mdi mdi-radar"></i> Highdmin</span>
-                        </a> -->
-                    <!-- Image Logo -->
-                    <a href="home" class="logo">
-                        <img src="<?= $template; ?>/assets/images/logo_sm.png" alt="" height="26" class="logo-small">
-                        <img src="<?= $template; ?>/assets/images/logo.png" alt="" height="22" class="logo-large">
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <a href="index.html" class="logo">
+                        <span>
+                            <img src="<?= base_url('logofamili/logo_hijau_283.jpg'); ?>" alt="" style="width: 177px;">
+                        </span>
+                        <i>
+                            <img src="<?= base_url('logofamili/bulat.png'); ?>" alt="" style="width: 54px;">
+                        </i>
                     </a>
-
                 </div>
-                <!-- End Logo container-->
+
+                <!-- User box -->
+                <div class="user-box">
+                    <div class="user-img">
+                        <img src="<?= base_url('profil/thumb/' . $avatar) ?>" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid">
+                    </div>
+                    <h5><a href="#"><?= $nama; ?></a> </h5>
+                    <p class="text-muted"><?= $userGroup; ?></p>
+                </div>
+
+                <!--- Sidemenu -->
+                <?= $this->include('layoutSuperMenu_v'); ?>
+                <!-- Sidebar -->
+
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
 
 
-                <div class="menu-extras topbar-custom">
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+
+            <!-- Top Bar Start -->
+            <div class="topbar">
+
+                <nav class="navbar-custom">
 
                     <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-                        <li class="menu-item">
-                            <!-- Mobile menu toggle-->
-                            <a class="navbar-toggle nav-link">
-                                <div class="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </a>
-                            <!-- End mobile menu toggle-->
+                        <li class="hide-phone app-search">
+                            <form>
+                                <input type="text" placeholder="Search..." class="form-control">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
                         </li>
 
 
+
+
+
                         <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="<?= $template; ?>/assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">ADMIN<?= $nama; ?><i class="mdi mdi-chevron-down"></i> </span>
+                            <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="<?= base_url('profil/thumb/' . $avatar) ?>" alt="user" class="rounded-circle"> <span class="ml-1"><?= $nama; ?> <i class="mdi mdi-chevron-down"></i> </span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fi-head"></i> <span>Akun Saya</span>
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item-->
+                                <a href="<?= base_url('admin/akun'); ?>" class="dropdown-item notify-item">
+                                    <i class="fi-head"></i> <span>My Account</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="<?= base_url('logout'); ?>" class="dropdown-item notify-item">
+                                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item"> -->
+                                <a href="<?= base_url('akun/logout'); ?>" class="dropdown-item notify-item">
                                     <i class="fi-power"></i> <span>Logout</span>
                                 </a>
 
                             </div>
                         </li>
+
                     </ul>
-                </div>
-                <!-- end menu-extras -->
 
-                <div class="clearfix"></div>
+                    <ul class="list-inline menu-left mb-0">
+                        <li class="float-left">
+                            <button class="button-menu-mobile open-left disable-btn">
+                                <i class="dripicons-menu"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <div class="page-title-box">
+                                <h4 class="page-title"><?= $judulPage; ?> </h4>
+                                <!-- <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Highdmin</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                    <li class="breadcrumb-item active">Starter</li>
+                                </ol> -->
+                            </div>
+                        </li>
 
-            </div> <!-- end container -->
-        </div>
-        <!-- end topbar-main -->
-        <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
-        <?php echo $this->include($vMenu); ?>
-        <!-- end navbar-custom -->
+                    </ul>
 
-    </header>
-    <!-- End Navigation Bar-->
+                </nav>
 
-
-    <div class="wrapper">
-        <div class="container">
-
-            <!-- Page-Title -->
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="page-title-box">
-                        <div class="d-flex">
-                            <?php if ($isHome == false) : ?>
-                                <a href="javascript:history.back()" class="mr-2 text-danger"><i class="icon-arrow-left-circle"></i></a>
-                            <?php endif ?>
-                            <h4 class="page-title"><?= $judulPage; ?></h4>
-                        </div>
-
-
-                    </div>
-                </div>
             </div>
-            <!-- end page title end breadcrumb -->
+            <!-- Top Bar End -->
 
 
 
+            <!-- Start Page content -->
+            <div class="content">
+                <div class="container-fluid">
 
-            <?= $this->renderSection('content'); ?>
+                    <?= $this->renderSection('content'); ?>
 
-            <div class="d-block d-sm-none" style="height:60px;"></div>
+                </div> <!-- container -->
 
-        </div> <!-- end container -->
+            </div> <!-- content -->
+
+            <footer class="footer text-right">
+                2018 © Highdmin. - Coderthemes.com
+            </footer>
+
+        </div>
+
+
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+
     </div>
-    <!-- end wrapper -->
+    <!-- END wrapper -->
 
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    2020 © Amanahjaya.online
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- End Footer -->
 
 
     <!-- jQuery  -->
-    <script src="<?= $template; ?>/assets/js/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    <script src="<?= $template; ?>/assets/js/waves.js"></script>
-    <script src="<?= $template; ?>/assets/js/jquery.slimscroll.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/jquery.min.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/popper.min.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/metisMenu.min.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/waves.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/jquery.slimscroll.js"></script>
 
     <!-- App js -->
-    <script src="<?= $template; ?>/assets/js/jquery.core.js"></script>
-    <script src="<?= $template; ?>/assets/js/jquery.app.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/jquery.core.js"></script>
+    <script src="<?= base_url('template/vertical'); ?>/assets/js/jquery.app.js"></script>
 
 
     <?= $this->renderSection('skrip'); ?>
 
-
+    <script>
+        $(document).ready(function() {
+            $('.loading').hide();
+        })
+    </script>
 </body>
 
 </html>

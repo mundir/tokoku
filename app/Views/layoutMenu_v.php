@@ -1,4 +1,4 @@
-<div class="navbar-custom">
+<div class="navbar-hijau">
     <div class="container-fluid">
         <div id="navigation">
             <!-- Navigation Menu-->
@@ -25,16 +25,18 @@
                     <a href="<?= base_url("keranjang") ?>"><i class="icon-basket"></i>Keranjang Belanja</a>
                 </li>
 
-                <li class="has-submenu <?= ($aktif == 'pesanan') ? 'active' : ''; ?>">
-                    <a href="<?= base_url("pesananku") ?>"><i class="icon-list"></i>Pesanan Saya</a>
-                </li>
-
-                <li class="has-submenu <?= ($aktif == 'keinginan') ? 'active' : ''; ?>">
-                    <a href="<?= base_url('whishlist') ?>"><i class="icon-heart"></i>Keinginan</a>
+                <li class="has-submenu <?= ($aktif == 'pesananku') ? 'active' : ''; ?>">
+                    <a href="#"><i class="icon-present"></i>Pesanan Saya</a>
+                    <ul class="submenu">
+                        <li><a href="<?= base_url('pesananku'); ?>">Pesanan Diambil</a></li>
+                        <li><a href="<?= base_url('pesananku/kirim'); ?>">Pesanan Dikirim</a></li>
+                        <li><a href="<?= base_url('pesananku/selesai'); ?>">Pesanan Selesai</a></li>
+                        <li><a href="<?= base_url('pesananku/batal'); ?>">Pesanan batal</a></li>
+                    </ul>
                 </li>
 
                 <li class="has-submenu <?= ($aktif == 'akun') ? 'active' : ''; ?>">
-                    <a href="<?= base_url('akun/profil_saya') ?>"><i class="icon-user"></i>Akun</a>
+                    <a href="<?= base_url('profilku') ?>"><i class="icon-user"></i>Akun</a>
                 </li>
 
 

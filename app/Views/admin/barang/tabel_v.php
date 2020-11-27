@@ -1,4 +1,4 @@
-<?= $this->extend('layout_v') ?>
+<?= $this->extend('layoutAdmin_v') ?>
 
 <?= $this->section('mycss') ?>
 <link rel="stylesheet" href="<?= base_url('mycss/main.css'); ?>">
@@ -24,10 +24,10 @@
 </div>
 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6">
     <?php foreach ($mainTabel as $brg) : ?>
-        <div class="col col-brg">
+        <div class="col col-brg" style="max-width:210px">
             <div class="card isi">
                 <div class="gambar">
-                    <img src="<?= base_url('img/kotak') . '/' . $brg->gambar ?>" class="card-img-top" alt="..." />
+                    <img src="<?= base_url('img/preview') . '/' . $brg->gambar ?>" class="card-img-top" alt="..." />
                 </div>
                 <div class="card-body p-2">
                     <div class="card-nmbarang">

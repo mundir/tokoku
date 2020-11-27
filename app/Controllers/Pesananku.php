@@ -7,94 +7,103 @@ class Pesananku extends BaseController
 
 	public function index()
 	{
-		$this->data['judulPage'] = 'Pesanan Belum Bayar';
-		$this->data['aktif'] = 'blmbayar';
-		//bayar QR-Code
-		$where = [
-			'id_pembeli' => $this->session->get('id'),
-			'status_bayar' => 0,
-			'cara_bayar' => 'qrcode'
-		];
-
-		$dtqrcode = $this->_ambildata($where);
-		//bayar Transfer
-		$where = [
-			'id_pembeli' => $this->session->get('id'),
-			'status_bayar' => 0,
-			'cara_bayar' => 'transfer'
-		];
-
-		$dtTransfer = $this->_ambildata($where);
-
+		$this->data['judulPage'] = 'Pesanan Ambil di Toko';
+		$this->data['aktif'] = 'pesananku';
+		$where =
+			[
+				'id_pembeli' => $this->session->get('id'),
+				'cara_kirim' => 'ambil',
+				'status_selesai' => 'proses'
+			];
+		$tabel = $this->_ambildata($where);
 		$data = [
-			'dtTabel' => array_merge($dtqrcode, $dtTransfer),
+			'dtTabel' => $tabel,
 			'showMenu' => true,
 			'showKeranjang' => true,
 			'showBack' => true,
 			'aktif' => 'pesanan',
-			'showBayar' => TRUE
+			'showBayar' => TRUE,
+			'showExp' => true
 		];
 
 		$this->data = array_merge($this->data, $data);
-		return view('pesananku_v', $this->data);
+		return view('pesananku/proses_v', $this->data);
 	}
 
-	public function dikemas()
+	public function kirim()
 	{
-		$this->data['judulPage'] = 'Pesanan Dikemas';
-		$this->data['aktif'] = 'dikemas';
-		//dikemas
-		$where = [
-			'id_pembeli' => $this->session->get('id'),
-			'cara_kirim' => 'kirim',
+		$this->data['judulPage'] = 'Pesanan Dikirim ke Alamat Anda';
+		$this->data['aktif'] = 'pesananku';
+		$where =
+			[
+				'id_pembeli' => $this->session->get('id'),
+				'cara_kirim' => 'kirim',
+				'status_selesai' => 'proses'
+			];
+		$tabel = $this->_ambildata($where);
+		$data = [
+			'dtTabel' => $tabel,
+			'showMenu' => true,
+			'showKeranjang' => true,
+			'showBack' => true,
+			'aktif' => 'pesanan',
+			'showBayar' => TRUE,
+			'showExp' => false
 		];
-		$this->data['dtTabel'] = $this->_ambildata($where);
-		return view('pesananku_v', $this->data);
-	}
 
-	public function dikirim()
-	{
-		$this->data['judulPage'] = 'Pesanan Dikirim';
-		//dikirim
-		$where = [
-			'id_pembeli' => $this->session->get('id'),
-			'cara_kirim' => 'kirim',
-			'status_kirim' => 1
-		];
-		$this->data['dtTabel'] = $this->_ambildata($where);
-		return view('pesananku_v', $this->data);
+		$this->data = array_merge($this->data, $data);
+		return view('pesananku/proses_v', $this->data);
 	}
 
 	public function selesai()
 	{
-		$this->data['judulPage'] = 'Pesanan Selesai';
-		//selesai
-		$where = [
-			'id_pembeli' => $this->session->get('id'),
-			'cara_kirim' => 'kirim',
-			'status_selesai' => 1
+		$this->data['judulPage'] = 'Pesanan Dikirim ke Alamat Anda';
+		$this->data['aktif'] = 'pesananku';
+		$where =
+			[
+				'id_pembeli' => $this->session->get('id'),
+				'status_selesai' => 'selesai'
+			];
+		$tabel = $this->_ambildata($where);
+		$data = [
+			'dtTabel' => $tabel,
+			'showMenu' => true,
+			'showKeranjang' => true,
+			'showBack' => true,
+			'aktif' => 'pesanan',
+			'showBayar' => TRUE,
+			'showExp' => false
 		];
-		$this->data['dtTabel'] = $this->_ambildata($where);
-		return view('pesananku_v', $this->data);
+
+		$this->data = array_merge($this->data, $data);
+		return view('pesananku/proses_v', $this->data);
 	}
 
-	public function bayar()
+	public function batal()
 	{
-		$post = $this->request->getPost();
-		$modelTransaksi = new \App\Models\Transaksi_m();
-		$tabel = $modelTransaksi->find($post['id']);
-		$caraBayar = $tabel->cara_bayar;
+		$this->data['judulPage'] = 'Pesanan Dikirim ke Alamat Anda';
+		$this->data['aktif'] = 'pesananku';
+		$where =
+			[
+				'id_pembeli' => $this->session->get('id'),
+				'status_selesai' => 'batal'
+			];
+		$tabel = $this->_ambildata($where);
+		$data = [
+			'dtTabel' => $tabel,
+			'showMenu' => true,
+			'showKeranjang' => true,
+			'showBack' => true,
+			'aktif' => 'pesanan',
+			'showBayar' => TRUE,
+			'showExp' => false
+		];
 
-		switch ($caraBayar) {
-			case 'tunai':
-				$view = 'bayarTunai_v';
-				break;
-			case "qrcode":
-				break;
-			case 'transfer':
-				break;
-		}
+		$this->data = array_merge($this->data, $data);
+		return view('pesananku/proses_v', $this->data);
 	}
+
+
 
 	private function _ambildata($where)
 	{
@@ -106,9 +115,10 @@ class Pesananku extends BaseController
 			->get()->getResult();
 		foreach ($tabel as $row) {
 			$dtDetail = $transaksiDetailModel
-				->select('barang.nama_barang, barang.gambar, transaksi_detail.*')
+				->select('barang.nama_barang, barang.gambar, transaksi_detail.qty, transaksi_detail.harga as hrg')
 				->join('barang', 'transaksi_detail.id_barang=barang.id')
 				->where('id_transaksi', $row->id)
+				->orderBy('created_at', 'DESC')
 				->get()->getResult();
 			$datax[] = ['transaksi' => $row, 'detail' => $dtDetail];
 		}

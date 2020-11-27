@@ -6,11 +6,13 @@
                 <h4 class="modal-title" id="labelBelum">Belum Login</h4>
             </div>
             <div class="modal-body">
-                <p>Maaf, anda belum bisa menambahkan ke Keranjang karena belum Login</p>
-                <p>Bila anda sudah memiliki Akun, silahkan lakukan <a href="<?= base_url('login'); ?>">LOGIN</a></p>
-                <p>Atau jika bila belum memiliki Akun, silahkan lakukan <a href="<?= base_url('regisrasi'); ?>">REGISTRASI</a></p>
+                <div class="card m-b-30">
+                    <img class="card-img-top img-fluid" src="<?= base_url(); ?>/logofamili/loginplease.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p>Maaf, anda belum bisa menambahkan ke Keranjang karena belum Login</p>
+                    </div>
+                </div>
             </div>
-
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>

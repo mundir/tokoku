@@ -14,6 +14,8 @@ class Barang extends BaseController
     }
     public function index()
     {
+        $dtKategori = $this->session->getFlashdata('dtKategori');
+        dd($dtKategori);
         if ($this->session->has('id_kategori')) {
             $id_kategori = $this->session->get('id_kategori');
             return redirect()->to('tampilkan/' . $id_kategori);
@@ -27,10 +29,26 @@ class Barang extends BaseController
             'dataTabel' => $dtKategori,
             'aktif' => 'home'
         ];
-        $data = array_merge($data, $this->data);
+        $data = array_merge($this->data, $data);
 
         return view($this->folderView . 'main_v', $data);
     }
+
+    public function set_kategori_group($id)
+    {
+
+        $kategoriModel = new \App\Models\Kategori_m();
+        $dtKategori = $kategoriModel->where('group_kategori', $id)->get()->getResult();
+        $barangModel = new \App\Models\Barang_m();
+
+        $barang = array();
+        foreach ($dtKategori as $row) {
+            $barang[] = ['id_kategori' => $row->id, 'tabel_barang' => $barangModel->where('id_kategori', $row->id)->get()->getResult()];
+        }
+        dd($barang);
+        return redirect()->to('index')->with('dtKategori', $dtKategori);
+    }
+
 
     public function sesskategori()
     {
@@ -56,9 +74,9 @@ class Barang extends BaseController
                 'judulPage' => 'Kategori - ' . $namaKategori,
                 'rowKategori' => $dtKategori,
                 'namaKategori' => $namaKategori,
-                'mainTabel' => $tbBarang->paginate(6, 'group1'),
+                'mainTabel' => $tbBarang->paginate(12, 'group1'),
                 'pager' => $tbBarang->pager,
-                'aktif' => 'kategori'
+                'aktif' => 'barang'
             ];
             $data = array_merge($this->data, $data);
             return view($this->folderView . 'tabel_v', $data);
@@ -68,7 +86,7 @@ class Barang extends BaseController
             'keterangan' => 'Belum ada data dalam kategori ini. Silahkan tambah data',
             'labelProses' => 'Tambah Data',
         ];
-        $data = array_merge($data, $this->data);
+        $data = array_merge($this->data, $data);
         return view($this->folderView . 'notFound_v', $data);
     }
 
@@ -85,7 +103,7 @@ class Barang extends BaseController
                 'judulPage' => 'Tambah ' . $nama_kategori,
                 'dataTabel' => '',
                 'submit' => 'Tambah',
-                'aktif' => 'kategori'
+                'aktif' => 'barang'
             ];
         } else {
             $modelBarang = new \App\Models\Barang_m();
@@ -95,7 +113,7 @@ class Barang extends BaseController
                 'judulPage' => 'Edit ' . $nama_kategori,
                 'dataTabel' => $tabel,
                 'submit' => 'Edit',
-                'aktif' => 'kategori'
+                'aktif' => 'barang'
 
             ];
         }
@@ -143,12 +161,13 @@ class Barang extends BaseController
             'judulPage' => 'Edit Gambar',
             'dataTabel' => $tabel,
             'submit' => 'Upload',
-            'aktif' => 'kategori',
+            'aktif' => 'barang',
             'pesanError' => $this->session->getFlashdata('pesanError')
         ];
         $data = array_merge($this->data, $data);
         return view($this->folderView . 'gambar_v', $data);
     }
+
 
     public function upload()
     {
@@ -163,16 +182,17 @@ class Barang extends BaseController
 
             $image = \Config\Services::image();
 
-            // $image->withFile($newImg)
-            //     ->resize(400, 400, true, 'width')
-            //     ->save(ROOTPATH . 'public/img/kotak/' . $baru);
             $image->withFile($newImg)
-                ->fit(400, 400, 'center')
-                ->save(ROOTPATH . 'public/img/kotak/' . $baru);
+                ->resize(400, 400, true, 'width')
+                ->save('img/detail/' . $baru);
 
             $image->withFile($newImg)
-                ->fit(100, 100, 'center')
-                ->save(ROOTPATH . 'public/img/thumb/' . $baru);
+                ->fit(200, 200, 'center')
+                ->save('img/preview/' . $baru);
+
+            $image->withFile($newImg)
+                ->resize(100, 100, true, 'height')
+                ->save('img/thumb/' . $baru);
 
             $model = new \App\Models\Barang_m();
             $ntt = new \App\Entities\Barang();
@@ -206,7 +226,7 @@ class Barang extends BaseController
             $data = [
                 'judulPage' => 'Hasil Cari "' . $post['txt-cari'] . '"',
                 'mainTabel' => $tbBarang,
-                'aktif' => 'kategori',
+                'aktif' => 'barang',
                 'backLink' => $this->folderView . 'tampilkan/' . $this->session->get('id_kategori')
             ];
             $this->data = array_merge($this->data, $data);

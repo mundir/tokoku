@@ -62,12 +62,12 @@
     <div class="col-sm-6">
         <div class="card mt-2">
             <div class="img-group">
-                <img class="card-img-top" id="img-img" src="<?= base_url('img/printer-laser.jpg'); ?>" alt="Card image cap">
+                <img class="card-img-top" id="img-img" src="#" alt="Card image cap">
             </div>
             <div class="d-flex list-img">
-                <img src="<?= base_url('img/printer-laser.jpg'); ?>" alt="..." class="img-thumbnail img-detail">
-                <img src="<?= base_url('img/printer-laser2.jpg'); ?>" alt="..." class="img-thumbnail img-detail">
-                <img src="<?= base_url('img/printer-laser3.jpg'); ?>" alt="..." class="img-thumbnail img-detail">
+                <img src="#" alt="..." class="img-thumbnail img-detail">
+                <img src="#" alt="..." class="img-thumbnail img-detail">
+                <img src="#" alt="..." class="img-thumbnail img-detail">
 
             </div>
 

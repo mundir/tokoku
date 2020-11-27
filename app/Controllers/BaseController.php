@@ -50,6 +50,8 @@ class BaseController extends Controller
 		$userGroup = '0';
 		$kategoriModel = new \App\Models\Kategori_m();
 		$dtKategori = $kategoriModel->findAll();
+		$katGroupModel = new \App\Models\Kategori_group_m();
+		$dtKatGroup = $katGroupModel->findAll();
 
 		if ($this->session->has('isLogin')) {
 			$row = $this->get_pengguna($this->session->get('id'));
@@ -70,7 +72,7 @@ class BaseController extends Controller
 			$jumlahKeranjang = 0;
 		}
 		$this->data = [
-			'judulWeb' => 'Toko Amanah Jaya Online',
+			'judulWeb' => 'Familimart Online',
 			'judulPage' => 'Under Construction',
 			'idPengguna' => $idPengguna,
 			'nama' => $nama,
@@ -79,9 +81,10 @@ class BaseController extends Controller
 			'userGroup' => $userGroup,
 			'akuns' => $this->vAkun($userGroup),
 			'dtKategori' => $dtKategori,
+			'dtKatGroup' => $dtKatGroup,
 		];
-		$this->data['showMenu'] = false;
-		$this->data['showKeranjang'] = false;
+		$this->data['showMenu'] = true;
+		$this->data['showKeranjang'] = true;
 		$this->data['showBack'] = True;
 		$this->data['subAktif'] = '';
 
@@ -125,7 +128,7 @@ class BaseController extends Controller
 	private function vAkun($userGroup)
 	{
 		$profil = [
-			'link' => 'profil',
+			'link' => 'profilku',
 			'icon' => 'icon-user',
 			'label' => 'Profilku',
 		];
